@@ -14,7 +14,7 @@ port: Number(process.env.DB_PORT),
 username: process.env.DB_USERNAME,
 password: process.env.DB_PASSWORD,
 database: process.env.DB_DATABASE,
-entities: [],
+entities: [`${__dirname}/models/**/*{.ts,.js}`],
 migrations: [
     Roles1719911334961,
     Services1719911390995,

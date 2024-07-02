@@ -1,10 +1,17 @@
 import express from 'express';
+
 import 'dotenv/config';
+
 import { AppDataSource } from './database/db';
+
 const app = express();
+
 app.use(express.json())
+
 const PORT = process.env.port || 4000;
+
 app.get('/healthy', (req, res) => {
+    
     //    res.send('Server is healthy')
     res.status(200).json(
         {

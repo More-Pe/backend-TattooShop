@@ -18,11 +18,13 @@ export class User1719907653311 implements MigrationInterface {
                         name: "first_name",
                         type: "varchar",
                         length: "255",
+                        isNullable: false
                     },
                     {
                         name: "last_name",
                         type: "varchar",
                         length: "255",
+                        isNullable: false
                     },
                     {
                         name: "email",
@@ -39,11 +41,17 @@ export class User1719907653311 implements MigrationInterface {
                     },
                     {
                         name: "role_id",
-                        type: "enum",
-                        enum: ['user','admin','superadmin'],
-                        default: "'user'"
+                        type: "int",
+                        default: 3
                     },
                 ],
+                foreignKeys: [
+                    {
+                        columnNames: ['role_id'],
+                        referencedColumnNames: ['id'],
+                        referencedTableName: 'roles'
+                    }
+                ]
             }),
             true
         );

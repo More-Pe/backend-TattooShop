@@ -18,13 +18,13 @@ export class User1719907653311 implements MigrationInterface {
                         name: "first_name",
                         type: "varchar",
                         length: "255",
-                        isNullable: false
+                        isNullable: true
                     },
                     {
                         name: "last_name",
                         type: "varchar",
                         length: "255",
-                        isNullable: false
+                        isNullable: true
                     },
                     {
                         name: "email",

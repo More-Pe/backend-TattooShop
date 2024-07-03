@@ -11,5 +11,5 @@ id!: Number
  name!: string
 
  @Column({ name: 'description'})
- description!: Text
+ description!: string
 }

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { User } from "../database/models/User";
 
-//READ
-export const getAllUsers = async (req: Request, res: Response) => { //TODO A esto solo debe poder acceder el superadmin
+//READ all users
+export const getAllUsers = async (req: Request, res: Response) => {
     try {
         //1. Obtener información
         const users = await User.find()
@@ -11,7 +11,7 @@ export const getAllUsers = async (req: Request, res: Response) => { //TODO A est
          res.status(200).json(
             {
                 success: true,
-                message: "Users retrived successfully!",
+                message: "Users retrived successfully",
                 data: users
             }
          )
@@ -21,6 +21,39 @@ export const getAllUsers = async (req: Request, res: Response) => { //TODO A est
             {
                 success: false,
                 message: "Cannot create user",
+                error: error
+            }
+        )
+    }
+}
+
+//READ profile
+export const getUserProfile = async (req: Request, res: Response) => {
+    try {
+        //1. Obtener información
+        const userId = req.tokenData.id;
+
+        //2. Bucarlo en DB
+
+        const user = await User.findOne(
+            {
+                where: { id: userId}
+            }
+        )
+        //2. Responder
+         res.status(200).json(
+            {
+                success: true,
+                message: "Profile retrived successfully",
+                data: user
+            }
+         )
+
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Cannot access to profile",
                 error: error
             }
         )
@@ -50,7 +83,7 @@ export const updateUserById = async (req: Request, res: Response) => {
         res.status(200).json(
             {
                 success: true,
-                message: "User updated successfully!",
+                message: "User updated successfully",
                 data: userUpdated
             }
         )
@@ -58,7 +91,7 @@ export const updateUserById = async (req: Request, res: Response) => {
       res.status(500).json(
         {
             success: false,
-            message: "User cannot be updated! Try again!",
+            message: "User cannot be updated",
             error: error
         }
       )
@@ -66,7 +99,7 @@ export const updateUserById = async (req: Request, res: Response) => {
 }
 
 //DELETE
-export const deleteUserById = async (req: Request, res: Response) => { //TODO A esto solo debe poder acceder el superadmin
+export const deleteUserById = async (req: Request, res: Response) => { 
     try {
         //1. Obtener el id a eliminar
 

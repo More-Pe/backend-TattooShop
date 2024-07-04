@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import { User } from "../database/models/User";
+import jwt from 'jsonwebtoken';
 
 //CREATE
 export const register = async (req: Request, res: Response) => {
@@ -78,6 +79,7 @@ export const login = async (req: Request, res: Response) => {
       }
   
       //3. Comprobar si el usuario existe
+
       const user = await User.findOne({
         where: { email: email },
       });
@@ -98,10 +100,23 @@ export const login = async (req: Request, res: Response) => {
           message: "Email or password not valid",
         });
       }
+
+      //5. Creación del token
+      const token = jwt.sign(
+      {
+        id: user.id,
+        role: user.role_id,
+        email: user.email,
+      },
+      'secreto',
+      {
+        expiresIn: "2h",
+      })
   
       res.status(200).json({
         success: true,
         message: "User logged",
+        token: token,
       });
   
       console.log(user);

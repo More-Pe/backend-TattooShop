@@ -3,7 +3,8 @@ import "dotenv/config";
 import { AppDataSource } from "./database/db";
 import { register, login } from "./controllers/auth.controller";
 import { deleteUserById, getAllUsers, updateUserById } from "./controllers/users.controller";
-import { createService, getAllServices } from "./controllers/services.controller";
+import { createService, getAllServices, updateService, deleteService } from "./controllers/services.controller";
+import { auth } from "./middlewares/auth";
 
 const app = express();
 app.use(express.json());
@@ -26,10 +27,15 @@ app.post("/api/auth/login", login);
 
 
 // USERS CRUD
-app.get("/api/users/profile", getAllUsers); //A esto solo debe poder acceder el superadmin
+app.get("/api/users", auth, getAllUsers); //A esto solo debe poder acceder el superadmin
+//TODO OBLIGATORIO ver perfil de usuario app.get("/api/users/profile",getUserProfile)
 app.put("/api/users/profile", updateUserById);
-app.delete("/api/users/{id}", deleteUserById); //A esto solo debe poder acceder el superadmin
+app.delete("/api/users/{id}", auth, deleteUserById); //A esto solo debe poder acceder el superadmin
+//TODO extra filtrar usuario por email (superadmin) app.get("/api/users?email=ejemplo@ejemplo.com", filterUserById)
+//TODO extra cambiar de roles (superadmin) app.put("/api/users/{id}/role", changeRoles)
 
 // SERVICES CRUD
-app.post("/create", createService);
-app.get("/services", getAllServices);
+app.post("/api/services", auth, createService); //A esto solo debe poder acceder el superadmin
+app.get("/api/services", getAllServices);
+app.put("/api/services/{id}", auth, updateService); //A esto solo debe poder acceder el superadmin
+app.delete("/api/services/{id}", auth, deleteService); //A esto solo debe poder acceder el superadmin

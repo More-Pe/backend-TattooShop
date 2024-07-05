@@ -8,10 +8,10 @@ export const register = async (req: Request, res: Response) => {
   try {
     // 1. Recuperar la info
     const email = req.body.email
-    const password = req.body.password
+    const password_hash = req.body.password_hash
 
     // 2. Validar la info
-    if(!email || !password) {
+    if(!email || !password_hash) {
       return res.json(400).json(
         {
           success: false,
@@ -22,7 +22,7 @@ export const register = async (req: Request, res: Response) => {
 
     // TODO validar formato email
 
-    if(password.length < 8  || password.length > 12) {
+    if(password_hash.length < 8  || password_hash.length > 12) {
       return res.status(400).json(
         {
           success: false,
@@ -34,7 +34,7 @@ export const register = async (req: Request, res: Response) => {
     // 3. Tratar la info si hace falta
 
     // TODO encriptar password
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = bcrypt.hashSync(password_hash, 10);
 
     // 4. Guardar en DB
     const newUser = await User.create(

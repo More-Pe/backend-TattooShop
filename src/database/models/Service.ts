@@ -5,7 +5,7 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Service extends BaseEntity {
 
   @PrimaryGeneratedColumn()
-  id!: Number;
+  id!: number;
 
   @Column({ name: "service_name" })
   service_name!: string;

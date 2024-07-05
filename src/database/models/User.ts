@@ -1,11 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm"
 
-@Entity()
+@Entity("users")
 
 export class User extends BaseEntity{
 
 @PrimaryGeneratedColumn()
-id!: Number
+id!: number
 
  @Column({ name: 'first_name'})
  first_name!: string
@@ -20,5 +20,8 @@ id!: Number
  password_hash!: string
 
  @Column({ name: 'role_id'})
- role_id!: Number
+ role_id!: number
+
+//  @OneToOne(() => Role, role => role.user)
+//  role! : Role [];
 }

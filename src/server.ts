@@ -23,8 +23,8 @@ AppDataSource.initialize()
 );
 
 // AUTH CRUD
-app.post("/api/auth/register", register);
-app.post("/api/auth/login", login);
+app.post("/auth/register", register);
+app.post("/auth/login", login);
 
 
 // USERS CRUD

@@ -6,6 +6,7 @@ import { deleteUserById, getAllUsers, updateUserById, getUserProfile } from "./c
 import { createService, getAllServices, updateService, deleteService } from "./controllers/services.controller";
 import { auth } from "./middlewares/auth";
 import { isSuperAdmin } from "./middlewares/isSuperAdmin";
+import { createAppointment, deleteAppointment, getAllAppointmentsForUser, getAppointmentById, updateAppointment } from "./controllers/appointments.controller";
 
 const app = express();
 app.use(express.json());
@@ -23,28 +24,29 @@ AppDataSource.initialize()
 );
 
 // AUTH CRUD
-app.post("/auth/register", register);
-app.post("/auth/login", login);
+app.post("/auth/register", register); //OBLIGATORIO
+app.post("/auth/login", login); //OBLIGATORIO
 
 
 // USERS CRUD
-app.get("/users", auth, isSuperAdmin, getAllUsers); //Ver todos los usuarios. A esto solo debe poder acceder el superadmin
-app.get("/profile", auth, getUserProfile) //Ver perfil del usuario
-app.put("/profile", auth, updateUserById); //Modificar los datos del perfil
-app.delete("/users/{id}", auth, isSuperAdmin, deleteUserById); //Eliminar el usuario. A esto solo debe poder acceder el superadmin
-//app.get("/users?email=ejemplo@ejemplo.com", filterUserById) TODO extra filtrar usuario por email (superadmin)
-//app.put("/users/{id}/role", changeRoles) TODO extra cambiar de roles (superadmin)
+app.get("/api/users", auth, isSuperAdmin, getAllUsers); //Ver todos los usuarios. A esto solo debe poder acceder el superadmin OBLIGATORIO
+app.get("/api/users/profile", auth, getUserProfile) //Ver perfil del usuario OBLIGATORIO
+app.put("/api/users/profile", auth, updateUserById); //Modificar los datos del perfil OBLIGATORIO
+app.delete("/api/users/{id}", auth, isSuperAdmin, deleteUserById); //Eliminar el usuario. A esto solo debe poder acceder el superadmin EXTRA
+//app.get("/users?email=ejemplo@ejemplo.com", filterUserById) TODO filtrar usuario por email (superadmin) EXTRA
+//app.put("/users/{id}/role", changeRoles) TODO cambiar de roles (superadmin) EXTRA
 
 
 // SERVICES CRUD
-app.post("/services", auth, isSuperAdmin, createService); //A esto solo debe poder acceder el superadmin
-app.get("/services", auth, getAllServices);
-app.put("/services/{id}", auth, isSuperAdmin, updateService); //A esto solo debe poder acceder el superadmin
-app.delete("/services/{id}", auth, isSuperAdmin, deleteService); //A esto solo debe poder acceder el superadmin
+app.post("/api/services", auth, isSuperAdmin, createService); //Crar servicio - A esto solo debe poder acceder el superadmin EXTRA
+app.get("/api/services", auth, getAllServices); //Ver todos los servicios OBLIGATORIO
+app.put("/api/services/{id}", auth, isSuperAdmin, updateService); //Modificar servicio - A esto solo debe poder acceder el superadmin EXTRA
+app.delete("/api/services/{id}", auth, isSuperAdmin, deleteService); //Eliminar servicio - A esto solo debe poder acceder el superadmin EXTRA
 
 // APPOINTMENTS CRUD
-app.post('/appointments') //Crear nueva cita
-app.put('/appointments')  //Modificar cita
-app.get('/appointments/{id}') //Recuperar cita
-app.get('/appointments')     //Ver mis citas
+app.post("/api/appointments", auth, createAppointment) //Crear nueva cita OBLIGATORIO
+app.put("/api/appointments", auth, updateAppointment)  //Modificar cita OBLIGATORIO
+app.get("/api/appointments/{id}", auth, getAppointmentById) //Recuperar cita OBLIGATORIO
+app.get("/api/appointments", auth, getAllAppointmentsForUser) //Ver mis citas OBLIGATORIO
+app.delete("/api/appointments", auth, deleteAppointment) // Borrar cita
 

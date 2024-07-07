@@ -38,7 +38,7 @@ export const createService =  async (req: Request, res: Response) => {
         res.status(500).json(
             {
                 success: false,
-                message: "Error creating user",
+                message: "Error creating service",
                 error: error
             }
         )

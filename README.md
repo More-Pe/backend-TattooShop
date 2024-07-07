@@ -1,10 +1,10 @@
 # 🏢 Tattoo Studio Appointment Management System
-___
+
 
 This project aims to develop the backend system for a tattoo studio appointment management system. The system allows users to register, log in, and access their personal area, where they can view and create appointments for various services offered by the studio.
 
 ## 🛠️ Services
-___
+
 The studio offers the following services:
 
 - **Custom Tattoos**: Clients can select unique designs and motifs, personalizing their tattoo experience according to their preferences and tastes.
@@ -14,7 +14,6 @@ The studio offers the following services:
 - **Piercing and Merchandise Sales**: In addition to its application services, the studio offers a selection of piercings and other body art-related products, allowing clients to purchase quality items to complement their unique style.
 
 ## 📌 Endpoints
-___
 
 ### 🔑 Authentication
 | Method | URI               | Action         |
@@ -50,28 +49,27 @@ ___
 | DELETE | /api/services/{id}       | Delete service     |
 
 ## 🗄️ Database Schema
-___
 
 <img src="./img/DB_Schema.png">
 
 ## ⚙️ Stack
-___
-**IDE** <br>
+
+**IDE** <br><br>
 <img alt="vsc" src="https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white">
 
-**Database** <br>
+**Database** <br><br>
 <img alt="mysql" src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
 
-**Language** <br>
+**Language** <br><br>
 <img alt="typescript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
 
-**Lybrary** <br>
+**Lybrary** <br><br>
 <img alt="jwt" src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white">
 
-**Framework** <br>
+**Framework** <br><br>
 <img alt= "express" src="https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white"> <img alt="nodejs" src="https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
 
-**Other tools** <br>
+**Other tools** <br><br>
 <img alt="npm" src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"> <img alt="docker" src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white">
 
 ## 📞 Contact

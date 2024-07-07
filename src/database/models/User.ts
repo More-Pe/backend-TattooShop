@@ -1,4 +1,6 @@
-import { BaseEntity, Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Role } from "./Role"
+import { Appointment } from "./Appointment"
 
 @Entity("users")
 
@@ -22,6 +24,10 @@ id!: number
  @Column({ name: 'role_id'})
  role_id!: number
 
-//  @OneToOne(() => Role, role => role.user)
-//  role! : Role [];
+@ManyToOne(() => Role, role => role.user)
+@JoinColumn({name: 'role_id'})
+role! : Role;
+
+@OneToMany(() => Appointment, appointments => appointments.user)
+appointments! : Appointment [];
 }

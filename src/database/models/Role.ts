@@ -8,11 +8,10 @@ export class Role extends BaseEntity{
 @PrimaryGeneratedColumn()
 id!: number
 
- @Column({ name: 'name'})
- name!: string
+@Column({ name: 'name'})
+name!: string
 
-//  @OneToMany(() => User, user => user.role)
-//  @JoinColumn({ name: ""})
-//  user! : User [];
+@OneToMany(() => User, user => user.role)
+user! : User [];
 
 }

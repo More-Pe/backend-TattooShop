@@ -1,6 +1,5 @@
 # 🏢 Tattoo Studio Appointment Management System
 
-
 This project aims to develop the backend system for a tattoo studio appointment management system. The system allows users to register, log in, and access their personal area, where they can view and create appointments for various services offered by the studio.
 
 ## 🛠️ Services

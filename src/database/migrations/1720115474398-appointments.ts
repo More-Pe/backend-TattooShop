@@ -15,7 +15,8 @@ export class Appointments1720115474398 implements MigrationInterface {
           },
           {
             name: "appointment_date",
-            type: "date",
+            type: "datetime",
+            isUnique: true,
           },
           {
             name: "user_id",
@@ -31,11 +32,13 @@ export class Appointments1720115474398 implements MigrationInterface {
             columnNames: ["user_id"],
             referencedColumnNames: ["id"],
             referencedTableName: "users",
+            onDelete: "CASCADE",
           },
           {
             columnNames: ["service_id"],
             referencedColumnNames: ["id"],
             referencedTableName: "services",
+            onDelete: "CASCADE",
           },
         ],
       }),

@@ -17,7 +17,7 @@ export const roleSeeder = async () => {
 
         const role3 = new Role()
         role3.id = 3;
-        role3.name = "user"
+        role3.name = "user";
         await role3.save()
 
         console.log("=======================================");

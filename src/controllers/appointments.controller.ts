@@ -135,7 +135,10 @@ export const getAppointmentById = async (req: Request, res: Response) => {
 };
 
 //READ user appointments
-export const getAllAppointmentsForUser = async (req: Request, res: Response) => {
+export const getAllAppointmentsForUser = async (
+  req: Request,
+  res: Response
+) => {
   try {
     // 1. Obtener el ID del usuario
     const userId = req.tokenData.id;
@@ -164,40 +167,39 @@ export const getAllAppointmentsForUser = async (req: Request, res: Response) => 
 
 // DELETE
 export const deleteAppointment = async (req: Request, res: Response) => {
-    try {
-      // 1. Obtener el id a eliminar
-      const appointmentId = parseInt(req.params.id, 10);
-      const userId = req.tokenData.id;
-  
-      // 2. Validar que la cita existe y pertenece al usuario
-      const appointmentToDelete = await Appointment.findOne({
-        where: {
-            id: appointmentId,
-            user_id: userId
-        }
-      });
-  
-      if (!appointmentToDelete) {
-        return res.status(404).json({
-          success: false,
-          message: "Appointment doesn't exist or doesn't belong to the user"
-        });
-      }
-  
-      // 3. Eliminar la cita de la DB
-      await Appointment.delete(appointmentId)
+  try {
+    // 1. Obtener el id a eliminar
+    const appointmentId = parseInt(req.params.id, 10);
+    const userId = req.tokenData.id;
 
-      // 4. Responder
-      res.status(200).json({
-        success: true,
-        message: "Appointment was deleted successfully"
-      });
-  
-    } catch (error) {
-      res.status(500).json({
+    // 2. Validar que la cita existe y pertenece al usuario
+    const appointmentToDelete = await Appointment.findOne({
+      where: {
+        id: appointmentId,
+        user_id: userId,
+      },
+    });
+
+    if (!appointmentToDelete) {
+      return res.status(404).json({
         success: false,
-        message: "Error deleting appointment",
-        error: error
+        message: "Appointment doesn't exist or doesn't belong to the user",
       });
     }
+
+    // 3. Eliminar la cita de la DB
+    await Appointment.delete(appointmentId);
+
+    // 4. Responder
+    res.status(200).json({
+      success: true,
+      message: "Appointment was deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error deleting appointment",
+      error: error,
+    });
   }
+};

@@ -27,7 +27,7 @@ export const roleSeeder = async () => {
 
     } catch (error: any) {
         console.log("=======================================");
-        console.log("ERROR ROLE SEEDER", error.message);
+        console.log("ERROR ROLES SEEDER", error.message);
         console.log("=======================================");
     } finally {
         await AppDataSource.destroy();

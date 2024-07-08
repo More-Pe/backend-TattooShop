@@ -35,13 +35,13 @@ export const serviceSeeder = async () => {
         await service5.save();
         
         console.log("=======================================");
-        console.log("Service seeder successfully");
+        console.log("Services seeder successfully");
         console.log("=======================================");
 
 
     } catch (error: any) {
         console.log("=======================================");
-        console.log("ERROR SERVICE SEEDER", error.message);
+        console.log("ERROR SERVICES SEEDER", error.message);
         console.log("=======================================");
     } finally {
         await AppDataSource.destroy();

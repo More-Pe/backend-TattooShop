@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Appointment = void 0;
 const typeorm_1 = require("typeorm");
+const Service_1 = require("./Service");
+const User_1 = require("./User");
 let Appointment = class Appointment extends typeorm_1.BaseEntity {
 };
 exports.Appointment = Appointment;
@@ -30,6 +32,16 @@ __decorate([
     (0, typeorm_1.Column)({ name: "service_id" }),
     __metadata("design:type", Number)
 ], Appointment.prototype, "service_id", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => Service_1.Service, (service) => service.appointments),
+    (0, typeorm_1.JoinColumn)({ name: "service_id" }),
+    __metadata("design:type", Service_1.Service)
+], Appointment.prototype, "service", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.appointments),
+    (0, typeorm_1.JoinColumn)({ name: "user_id" }),
+    __metadata("design:type", User_1.User)
+], Appointment.prototype, "user", void 0);
 exports.Appointment = Appointment = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)("appointments")
 ], Appointment);

@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUserById = exports.updateUserById = exports.getAllUsers = void 0;
+exports.deleteUserById = exports.updateUserById = exports.getUserProfile = exports.getAllUsers = void 0;
 const User_1 = require("../database/models/User");
-//READ
+//READ all users
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //1. Obtener información
@@ -19,19 +19,44 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         //2. Responder
         res.status(200).json({
             success: true,
-            message: "Users retrived successfully!",
-            data: users
+            message: "Users retrived successfully",
+            data: users,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
             message: "Cannot create user",
-            error: error
+            error: error,
         });
     }
 });
 exports.getAllUsers = getAllUsers;
+//READ profile
+const getUserProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        //1. Obtener información
+        const userId = req.tokenData.id;
+        //2. Bucarlo en DB
+        const user = yield User_1.User.findOne({
+            where: { id: userId },
+        });
+        //2. Responder
+        res.status(200).json({
+            success: true,
+            message: "Profile retrived successfully",
+            data: user,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Cannot access to profile",
+            error: error,
+        });
+    }
+});
+exports.getUserProfile = getUserProfile;
 //UPDATE
 const updateUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -42,20 +67,20 @@ const updateUserById = (req, res) => __awaiter(void 0, void 0, void 0, function*
         //3. Tratar la info si es necesario (no)
         //4. Guardar la información en la DB
         const userUpdated = yield User_1.User.update({
-            id: parseInt(userIdToUpdate)
+            id: parseInt(userIdToUpdate),
         }, body);
         //5. Responder
         res.status(200).json({
             success: true,
-            message: "User updated successfully!",
-            data: userUpdated
+            message: "User updated successfully",
+            data: userUpdated,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "User cannot be updated! Try again!",
-            error: error
+            message: "User cannot be updated",
+            error: error,
         });
     }
 });
@@ -70,21 +95,21 @@ const deleteUserById = (req, res) => __awaiter(void 0, void 0, void 0, function*
         if (!userDeleted.affected) {
             return res.status(400).json({
                 success: false,
-                message: "User doesn't exist"
+                message: "User doesn't exist",
             });
         }
         //3. Responder
         res.status(200).json({
             success: true,
             message: "User was deleted succesfully",
-            data: userDeleted
+            data: userDeleted,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
             message: "Error deleting user",
-            error: error
+            error: error,
         });
     }
 });

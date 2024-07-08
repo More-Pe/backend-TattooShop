@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Appointments1719911378237 = void 0;
+exports.Users1720115460024 = void 0;
 const typeorm_1 = require("typeorm");
-class Appointments1719911378237 {
+class Users1720115460024 {
     up(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
             yield queryRunner.createTable(new typeorm_1.Table({
-                name: "appointments",
+                name: "users",
                 columns: [
                     {
                         name: "id",
@@ -25,36 +25,50 @@ class Appointments1719911378237 {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "appointment_date",
-                        type: "date",
+                        name: "first_name",
+                        type: "varchar",
+                        length: "255",
+                        isNullable: true,
                     },
                     {
-                        name: "user_id",
-                        type: "int"
+                        name: "last_name",
+                        type: "varchar",
+                        length: "255",
+                        isNullable: true,
                     },
                     {
-                        name: "service_id",
-                        type: "int"
-                    },
-                ], foreignKeys: [
-                    {
-                        columnNames: ['user_id'],
-                        referencedColumnNames: ['id'],
-                        referencedTableName: 'users'
+                        name: "email",
+                        type: "varchar",
+                        length: "255",
+                        isNullable: false,
+                        isUnique: true,
                     },
                     {
-                        columnNames: ['service_id'],
-                        referencedColumnNames: ['id'],
-                        referencedTableName: 'services'
-                    }
-                ]
+                        name: "password_hash",
+                        type: "varchar",
+                        length: "255",
+                        isNullable: false,
+                    },
+                    {
+                        name: "role_id",
+                        type: "int",
+                        default: 3,
+                    },
+                ],
+                foreignKeys: [
+                    {
+                        columnNames: ["role_id"],
+                        referencedColumnNames: ["id"],
+                        referencedTableName: "roles",
+                    },
+                ],
             }), true);
         });
     }
     down(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield queryRunner.dropTable("appointments");
+            yield queryRunner.dropTable("users");
         });
     }
 }
-exports.Appointments1719911378237 = Appointments1719911378237;
+exports.Users1720115460024 = Users1720115460024;

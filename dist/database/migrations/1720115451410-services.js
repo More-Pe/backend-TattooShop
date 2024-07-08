@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Roles1719911334961 = void 0;
+exports.Services1720115451410 = void 0;
 const typeorm_1 = require("typeorm");
-class Roles1719911334961 {
+class Services1720115451410 {
     up(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
             yield queryRunner.createTable(new typeorm_1.Table({
-                name: "roles",
+                name: "services",
                 columns: [
                     {
                         name: "id",
@@ -25,10 +25,15 @@ class Roles1719911334961 {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "name",
+                        name: "service_name",
                         type: "varchar",
                         length: "255",
-                        isNullable: false
+                        isUnique: true,
+                        isNullable: false,
+                    },
+                    {
+                        name: "description",
+                        type: "text",
                     },
                 ],
             }), true);
@@ -36,8 +41,8 @@ class Roles1719911334961 {
     }
     down(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield queryRunner.dropTable("roles");
+            yield queryRunner.dropTable("services");
         });
     }
 }
-exports.Roles1719911334961 = Roles1719911334961;
+exports.Services1720115451410 = Services1720115451410;

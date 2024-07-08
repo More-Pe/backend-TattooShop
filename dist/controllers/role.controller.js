@@ -9,115 +9,116 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteService = exports.updateService = exports.getAllServices = exports.createService = void 0;
-const Service_1 = require("../database/models/Service");
+exports.deleteRole = exports.updateRole = exports.getAllRoles = exports.createRole = void 0;
+const Role_1 = require("../database/models/Role");
 //CREATE
-const createService = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createRole = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //1. Obtener info
-        const serviceName = req.body.service_name;
-        const description = req.body.description;
+        const roleId = req.body.id;
+        const roleName = req.body.name;
         //2. Validar info
-        if (!serviceName || !description) {
+        if (!roleId || !roleName) {
             return res.status(400).json({
                 success: false,
-                message: "Name and description are required",
+                message: "Role Id and role name are required",
             });
         }
         //3. Guardar en la DB
-        const newService = yield Service_1.Service.create({
-            service_name: serviceName,
-            description: description,
+        const newRole = yield Role_1.Role.create({
+            id: roleId,
+            name: roleName,
         }).save();
         //4. Responder
         res.status(201).json({
             success: true,
-            message: "Service have been created succesfully",
+            message: "Role have been created succesfully",
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error creating service",
+            message: "Error creating role",
             error: error,
         });
     }
 });
-exports.createService = createService;
+exports.createRole = createRole;
 //READ
-const getAllServices = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllRoles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //1. Recupero info
-        const service = yield Service_1.Service.find();
+        const role = yield Role_1.Role.find();
         res.json({
             success: true,
-            message: "All services retrieved succesfully",
-            data: service,
+            message: "All roles retrieved succesfully",
+            data: role,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error getting services",
+            message: "Error getting roles",
             error: error,
         });
     }
 });
-exports.getAllServices = getAllServices;
+exports.getAllRoles = getAllRoles;
 //UPDATE
-const updateService = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateRole = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // 1. Recuperar la info
-        const serviceIdToUpdate = req.params.id;
+        const roleIdToUpdate = req.params.id;
         const body = req.body;
         // 2. Validar la info (no es necesario)
         // 3. Tratar la info si es necesario (no)
         // 4. Actualizar en DB
-        const serviceUpdated = yield Service_1.Service.update({
-            id: parseInt(serviceIdToUpdate),
+        const roleUpdated = yield Role_1.Role.update({
+            id: parseInt(roleIdToUpdate),
         }, body);
         // 5. Responder
         res.status(200).json({
             success: true,
-            message: "Service updated succesfully",
-            data: serviceUpdated,
+            message: "Role updated succesfully",
+            data: roleUpdated,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Service cannot be updated",
+            message: "Role cannot be updated",
             error: error,
         });
     }
 });
-exports.updateService = updateService;
+exports.updateRole = updateRole;
 //DELETE
-const deleteService = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteRole = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //1. Obtener el id a eliminar
-        const serviceToDelete = Number(req.params.id);
+        const roleToDelete = Number(req.params.id);
+        const body = req.body;
         //2. Eliminar de la DB
-        const serviceDeleted = yield Service_1.Service.delete(serviceToDelete);
-        if (!serviceDeleted.affected) {
+        const roleDeleted = yield Role_1.Role.delete(roleToDelete);
+        if (!roleDeleted.affected) {
             return res.status(404).json({
                 success: false,
-                message: "Service doesn't exist",
+                message: "Role doesn't exist",
             });
         }
         //3. Responder
         res.status(200).json({
             succes: true,
-            message: "Service was deleted succesfully",
-            data: serviceDeleted,
+            message: "Role was deleted succesfully",
+            data: roleDeleted,
         });
     }
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error deleting service",
+            message: "Error deleting role",
             error: error,
         });
     }
 });
-exports.deleteService = deleteService;
+exports.deleteRole = deleteRole;

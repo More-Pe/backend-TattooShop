@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Services1719911390995 = void 0;
+exports.Appointments1720115474398 = void 0;
 const typeorm_1 = require("typeorm");
-class Services1719911390995 {
+class Appointments1720115474398 {
     up(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
             yield queryRunner.createTable(new typeorm_1.Table({
-                name: "services",
+                name: "appointments",
                 columns: [
                     {
                         name: "id",
@@ -25,15 +25,31 @@ class Services1719911390995 {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "service_name",
-                        type: "varchar",
-                        length: "255",
+                        name: "appointment_date",
+                        type: "datetime",
                         isUnique: true,
-                        isNullable: false
                     },
                     {
-                        name: "description",
-                        type: "text",
+                        name: "user_id",
+                        type: "int",
+                    },
+                    {
+                        name: "service_id",
+                        type: "int",
+                    },
+                ],
+                foreignKeys: [
+                    {
+                        columnNames: ["user_id"],
+                        referencedColumnNames: ["id"],
+                        referencedTableName: "users",
+                        onDelete: "CASCADE",
+                    },
+                    {
+                        columnNames: ["service_id"],
+                        referencedColumnNames: ["id"],
+                        referencedTableName: "services",
+                        onDelete: "CASCADE",
                     },
                 ],
             }), true);
@@ -41,8 +57,8 @@ class Services1719911390995 {
     }
     down(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield queryRunner.dropTable("services");
+            yield queryRunner.dropTable("appointments");
         });
     }
 }
-exports.Services1719911390995 = Services1719911390995;
+exports.Appointments1720115474398 = Appointments1720115474398;

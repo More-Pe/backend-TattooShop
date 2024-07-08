@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User1719907653311 = void 0;
+exports.Roles1720115431212 = void 0;
 const typeorm_1 = require("typeorm");
-class User1719907653311 {
+class Roles1720115431212 {
     up(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
             yield queryRunner.createTable(new typeorm_1.Table({
-                name: "users",
+                name: "roles",
                 columns: [
                     {
                         name: "id",
@@ -25,50 +25,19 @@ class User1719907653311 {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "first_name",
-                        type: "varchar",
-                        length: "255",
-                        isNullable: true
-                    },
-                    {
-                        name: "last_name",
-                        type: "varchar",
-                        length: "255",
-                        isNullable: true
-                    },
-                    {
-                        name: "email",
+                        name: "name",
                         type: "varchar",
                         length: "255",
                         isNullable: false,
-                        isUnique: true
-                    },
-                    {
-                        name: "password_hash",
-                        type: "varchar",
-                        length: "255",
-                        isNullable: false
-                    },
-                    {
-                        name: "role_id",
-                        type: "int",
-                        default: 3
                     },
                 ],
-                foreignKeys: [
-                    {
-                        columnNames: ['role_id'],
-                        referencedColumnNames: ['id'],
-                        referencedTableName: 'roles'
-                    }
-                ]
             }), true);
         });
     }
     down(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield queryRunner.dropTable("users");
+            yield queryRunner.dropTable("roles");
         });
     }
 }
-exports.User1719907653311 = User1719907653311;
+exports.Roles1720115431212 = Roles1720115431212;

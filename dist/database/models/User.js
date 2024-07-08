@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
+const Role_1 = require("./Role");
+const Appointment_1 = require("./Appointment");
 let User = class User extends typeorm_1.BaseEntity {
 };
 exports.User = User;
@@ -19,25 +21,34 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: 'first_name' }),
+    (0, typeorm_1.Column)({ name: "first_name" }),
     __metadata("design:type", String)
 ], User.prototype, "first_name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: 'last_name' }),
+    (0, typeorm_1.Column)({ name: "last_name" }),
     __metadata("design:type", String)
 ], User.prototype, "last_name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: 'email' }),
+    (0, typeorm_1.Column)({ name: "email" }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: 'password_hash' }),
+    (0, typeorm_1.Column)({ name: "password_hash" }),
     __metadata("design:type", String)
 ], User.prototype, "password_hash", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: 'role_id' }),
+    (0, typeorm_1.Column)({ name: "role_id" }),
     __metadata("design:type", Number)
 ], User.prototype, "role_id", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => Role_1.Role, (role) => role.users),
+    (0, typeorm_1.JoinColumn)({ name: "role_id" }),
+    __metadata("design:type", Role_1.Role)
+], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Appointment_1.Appointment, (appointments) => appointments.user),
+    __metadata("design:type", Array)
+], User.prototype, "appointments", void 0);
 exports.User = User = __decorate([
-    (0, typeorm_1.Entity)()
+    (0, typeorm_1.Entity)("users")
 ], User);

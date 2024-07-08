@@ -1,6 +1,8 @@
 import express from "express";
 import "dotenv/config";
 import { AppDataSource } from "./database/db";
+import { auth } from "./middlewares/auth";
+import { isSuperAdmin } from "./middlewares/isSuperAdmin";
 import { register, login } from "./controllers/auth.controller";
 import {
   deleteUserById,
@@ -14,8 +16,6 @@ import {
   updateService,
   deleteService,
 } from "./controllers/services.controller";
-import { auth } from "./middlewares/auth";
-import { isSuperAdmin } from "./middlewares/isSuperAdmin";
 import {
   createAppointment,
   deleteAppointment,
@@ -23,11 +23,18 @@ import {
   getAppointmentById,
   updateAppointment,
 } from "./controllers/appointments.controller";
-import { createRole, updateRole, getAllRoles, deleteRole } from "./controllers/role.controller";
+import {
+  createRole,
+  updateRole,
+  getAllRoles,
+  deleteRole,
+} from "./controllers/role.controller";
 
 const app = express();
 app.use(express.json());
+
 const PORT = process.env.port || 4000;
+
 AppDataSource.initialize()
   .then(() => {
     console.log("Database connected");
@@ -37,7 +44,8 @@ AppDataSource.initialize()
   })
   .catch((error) => {
     console.log(error);
-  });
+  }
+);
 
 // AUTH CRUD
 app.post("/auth/register", register); //OBLIGATORIO

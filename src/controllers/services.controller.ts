@@ -5,11 +5,11 @@ import { Service } from "../database/models/Service";
 export const createService = async (req: Request, res: Response) => {
   try {
     //1. Obtener info
-    const service_name = req.body.service_name;
+    const serviceName = req.body.service_name;
     const description = req.body.description;
 
     //2. Validar info
-    if (!service_name || !description) {
+    if (!serviceName || !description) {
       return res.status(400).json({
         success: false,
         message: "Name and description are required",
@@ -18,7 +18,7 @@ export const createService = async (req: Request, res: Response) => {
 
     //3. Guardar en la DB
     const newService = await Service.create({
-      service_name: service_name,
+      service_name: serviceName,
       description: description,
     }).save();
 
@@ -91,7 +91,6 @@ export const deleteService = async (req: Request, res: Response) => {
   try {
     //1. Obtener el id a eliminar
     const serviceToDelete = Number(req.params.id);
-    const body = req.body;
 
     //2. Eliminar de la DB
     const serviceDeleted = await Service.delete(serviceToDelete);

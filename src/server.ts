@@ -23,6 +23,7 @@ import {
   getAppointmentById,
   updateAppointment,
 } from "./controllers/appointments.controller";
+import { createRole, updateRole, getAllRoles, deleteRole } from "./controllers/role.controller";
 
 const app = express();
 app.use(express.json());
@@ -62,3 +63,9 @@ app.put("/api/appointments", auth, updateAppointment); //Modificar cita OBLIGATO
 app.get("/api/appointments/{id}", auth, getAppointmentById); //Recuperar cita OBLIGATORIO
 app.get("/api/appointments", auth, getAllAppointmentsForUser); //Ver mis citas OBLIGATORIO
 app.delete("/api/appointments", auth, deleteAppointment); // Borrar cita
+
+// ROLES CRUD
+app.post("/api/roles", auth, isSuperAdmin, createRole); //Crar rol - A esto solo debe poder acceder el superadmin EXTRA
+app.get("/api/roles", auth, isSuperAdmin, getAllRoles); //Ver todos los roles - Superadmin
+app.put("/api/roles/{id}", auth, isSuperAdmin, updateRole); //Modificar rol - A esto solo debe poder acceder el superadmin
+app.delete("/api/roles/{id}", auth, isSuperAdmin, deleteRole); //Eliminar rol - A esto solo debe poder acceder el superadmin

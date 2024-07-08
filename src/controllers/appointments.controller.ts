@@ -93,7 +93,7 @@ export const updateAppointment = async (req: Request, res: Response) => {
 export const getAppointmentById = async (req: Request, res: Response) => {
   try {
     // 1. Obtener el ID de la cita
-    const appointmentId = req.params.id;
+    const appointmentId = req.body.id;
     const userId = req.tokenData.id;
 
     // 2. Validar info
@@ -106,6 +106,18 @@ export const getAppointmentById = async (req: Request, res: Response) => {
 
     // 3. Buscar la cita en la DB
     const appointment = await Appointment.findOne({
+      select: {
+        id: true,
+        appointment_date: true,
+        user: {
+          id: true,
+          email: true,
+        },
+        service: {
+          id: true,
+          service_name: true,
+        },
+      },
       where: {
         id: parseInt(appointmentId, 10),
         user_id: userId,
@@ -145,11 +157,24 @@ export const getAllAppointmentsForUser = async (
 
     // 2. Buscar todas las citas del usuario en la DB
     const appointments = await Appointment.find({
+      select: {
+        id: true,
+        appointment_date: true,
+        user: {
+          id: true,
+          email: true,
+        },
+        service: {
+          id: true,
+          service_name: true,
+        },
+      },
       where: {
         user_id: userId,
       },
-    });
 
+      relations: { user: true, service: true }, //Dice con qué tablas relaciono para selccionar (select) la info que que quiero ver
+    });
     // 3. Responder
     res.status(200).json({
       success: true,

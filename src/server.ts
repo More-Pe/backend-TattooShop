@@ -60,8 +60,8 @@ app.delete("/api/services/{id}", auth, isSuperAdmin, deleteService); //Eliminar 
 // APPOINTMENTS CRUD
 app.post("/api/appointments", auth, createAppointment); //Crear nueva cita OBLIGATORIO
 app.put("/api/appointments", auth, updateAppointment); //Modificar cita OBLIGATORIO
-app.get("/api/appointments/{id}", auth, getAppointmentById); //Recuperar cita OBLIGATORIO
 app.get("/api/appointments", auth, getAllAppointmentsForUser); //Ver mis citas OBLIGATORIO
+app.get("/api/appointments/{id}", auth, getAppointmentById); //Recuperar cita OBLIGATORIO
 app.delete("/api/appointments", auth, deleteAppointment); // Borrar cita
 
 // ROLES CRUD

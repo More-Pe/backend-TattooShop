@@ -43,10 +43,8 @@ The studio offers the following services:
 |--------|-----------------------------------|---------------------|-------------|-------------------------------------------------|
 | GET    | /api/users/all                    | View all users      | Superadmin  | N/A                                             |
 | GET    | /api/users/profile                | View user profile   | User        | N/A                                             |
-| PUT    | /api/users/profile/update         | Update user profile | User        | `{ "field_to_update": "newValue" }`              |
-| GET    | /api/users?email=example@example.com | Filter user by email | Superadmin | N/A                                             |
+| PUT    | /api/users/profile/update         | Update user profile | User        | `{ "field_to_update": "newValue" }`             |
 | DELETE | /api/users/:id                    | Delete user         | Superadmin  | N/A                                             |
-| PUT    | /api/users/:id/role               | Change user role    | Superadmin  | `{ "role_id": newRoleId }`                      |
 
 ### 📅 Appointments
 | Method | URI                              | Action                | Permissions | Body                                            |
@@ -70,7 +68,7 @@ The studio offers the following services:
 |--------|-----------------------------|----------------|-------------|-------------------------------------------------|
 | GET    | /api/roles/all              | View all roles | Superadmin  | N/A                                             |
 | POST   | /api/roles/create           | Create role    | Superadmin  | `{ "id": number, "name": "roleName" }`          |
-| PUT    | /api/roles/update/:id       | Update role    | Superadmin  | `{ "field_to_update": "newValue" }`              |
+| PUT    | /api/roles/update/:id       | Update role    | Superadmin  | `{ "field_to_update": "newValue" }`             |
 | DELETE | /api/roles/delete/:id       | Delete role    | Superadmin  | N/A                                             |
 
 ## 📞 Contact

@@ -59,9 +59,6 @@ app.get("/api/users/profile", auth, getUserProfile); //Ver perfil del usuario OB
 app.put("/api/users/profile/update", auth, updateUserById); //Modificar los datos del perfil OBLIGATORIO (Funciona)
 app.delete("/api/users/:id", auth, isSuperAdmin, deleteUserById); //Eliminar el usuario. EXTRA (Funciona)
 
-//app.get("/users?email=ejemplo@ejemplo.com", filterUserById) TODO filtrar usuario por email (superadmin) EXTRA
-//app.put("/users/{id}/role", changeRoles) TODO cambiar de roles (superadmin) EXTRA
-
 // SERVICES CRUD
 app.post("/api/services/create", auth, isSuperAdmin, createService); //Crar servicio - EXTRA (Funciona)
 app.get("/api/services/all", auth, getAllServices); //Ver todos los servicios OBLIGATORIO (Funciona)
@@ -79,4 +76,4 @@ app.get("/api/appointments/:id", auth, getAppointmentById); //Recuperar cita OBL
 app.post("/api/roles/create", auth, isSuperAdmin, createRole); //Crar rol -  EXTRA (Funciona)
 app.get("/api/roles/all", auth, isSuperAdmin, getAllRoles); //Ver todos los roles (Funciona)
 app.put("/api/roles/update/:id", auth, isSuperAdmin, updateRole); //Modificar rol (Funciona)
-app.delete("/api/roles/delete/:id", auth, isSuperAdmin, deleteRole); //Eliminar rol
+app.delete("/api/roles/delete/:id", auth, isSuperAdmin, deleteRole); //Eliminar rol (Funciona)

@@ -55,21 +55,15 @@ export const getUserProfile = async (req: Request, res: Response) => {
 };
 
 //UPDATE
-
 export const updateUserById = async (req: Request, res: Response) => {
   try {
-    //1. Obtener el id del usuario a modificar
-    const userIdToUpdate = req.params.userIdToUpdate;
+    //1. Obtener el id del usuario desde el token decodificado
+    const userIdToUpdate = req.tokenData.id;
     const body = req.body;
-
-    //2. Validar la información (no es necesario)
-    //3. Tratar la info si es necesario (no)
 
     //4. Guardar la información en la DB
     const userUpdated = await User.update(
-      {
-        id: parseInt(userIdToUpdate),
-      },
+      { id: userIdToUpdate },
       body
     );
 

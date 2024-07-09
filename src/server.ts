@@ -54,9 +54,9 @@ app.post("/api/auth/register", register); //OBLIGATORIO (Funciona)
 app.post("/api/auth/login", login); //OBLIGATORIO (Funciona)
 
 // USERS CRUD
-app.get("/api/users/all", auth, isSuperAdmin, getAllUsers); //Ver todos los usuarios. A esto solo debe poder acceder el superadmin OBLIGATORIO
-app.get("/api/users/profile", auth, getUserProfile); //Ver perfil del usuario OBLIGATORIO
-app.put("/api/users/profile/update", auth, updateUserById); //Modificar los datos del perfil OBLIGATORIO
+app.get("/api/users/all", auth, isSuperAdmin, getAllUsers); //Ver todos los usuarios. A esto solo debe poder acceder el superadmin OBLIGATORIO (Funciona)
+app.get("/api/users/profile", auth, getUserProfile); //Ver perfil del usuario OBLIGATORIO (Funciona)
+app.put("/api/users/profile/update", auth, updateUserById); //Modificar los datos del perfil OBLIGATORIO (Funciona)
 app.delete("/api/users/:id", auth, isSuperAdmin, deleteUserById); //Eliminar el usuario. A esto solo debe poder acceder el superadmin EXTRA
 //app.get("/users?email=ejemplo@ejemplo.com", filterUserById) TODO filtrar usuario por email (superadmin) EXTRA
 //app.put("/users/{id}/role", changeRoles) TODO cambiar de roles (superadmin) EXTRA

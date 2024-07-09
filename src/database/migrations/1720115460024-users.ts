@@ -47,8 +47,9 @@ export class Users1720115460024 implements MigrationInterface {
         foreignKeys: [
           {
             columnNames: ["role_id"],
-            referencedColumnNames: ["id"],
             referencedTableName: "roles",
+            referencedColumnNames: ["id"],
+            onDelete: "CASCADE"
           },
         ],
       }),

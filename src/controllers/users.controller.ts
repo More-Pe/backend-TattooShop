@@ -5,7 +5,13 @@ import { User } from "../database/models/User";
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     //1. Obtener información
-    const users = await User.find();
+    const users = await User.find(
+      {
+        select: {
+          email: true
+        }
+      }
+    )
 
     //2. Responder
     res.status(200).json({
@@ -16,7 +22,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Cannot create user",
+      message: "Cannot show all users",
       error: error,
     });
   }

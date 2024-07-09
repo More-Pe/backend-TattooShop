@@ -6,7 +6,8 @@ export const isSuperAdmin = (
   next: NextFunction
 ) => {
   try {
-    if (req.tokenData.role !== "super_admin") {
+    console.log(req.tokenData)
+    if (req.tokenData.role_id !== 1) {
       return res.status(403).json({
         success: false,
         message: "Unauthorized access",

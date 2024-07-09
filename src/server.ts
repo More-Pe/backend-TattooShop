@@ -71,12 +71,12 @@ app.delete("/api/services/delete/:id", auth, isSuperAdmin, deleteService); //Eli
 // APPOINTMENTS CRUD
 app.post("/api/appointments/create", auth, createAppointment); //Crear nueva cita OBLIGATORIO (Funciona)
 app.put("/api/appointments/update", auth, updateAppointment); //Modificar cita OBLIGATORIO (Funciona)
-app.get("/api/appointments/scheduled", auth, getAllAppointmentsForUser); //Ver mis citas OBLIGATORIO
-app.delete("/api/appointments/delete", auth, deleteAppointment); // Borrar cita
-app.get("/api/appointments/:id", auth, getAppointmentById); //Recuperar cita OBLIGATORIO
+app.get("/api/appointments/scheduled", auth, getAllAppointmentsForUser); //Ver mis citas OBLIGATORIO (Funciona)
+app.delete("/api/appointments/delete", auth, deleteAppointment); // Borrar cita (Funciona)
+app.get("/api/appointments/:id", auth, getAppointmentById); //Recuperar cita OBLIGATORIO (Funciona)
 
 // ROLES CRUD
-app.post("/api/roles/create", auth, isSuperAdmin, createRole); //Crar rol -  EXTRA
-app.get("/api/roles/all", auth, isSuperAdmin, getAllRoles); //Ver todos los roles - 
-app.put("/api/roles/update/:id", auth, isSuperAdmin, updateRole); //Modificar rol -
-app.delete("/api/roles/delete/:id", auth, isSuperAdmin, deleteRole); //Eliminar rol -
+app.post("/api/roles/create", auth, isSuperAdmin, createRole); //Crar rol -  EXTRA (Funciona)
+app.get("/api/roles/all", auth, isSuperAdmin, getAllRoles); //Ver todos los roles (Funciona)
+app.put("/api/roles/update/:id", auth, isSuperAdmin, updateRole); //Modificar rol (Funciona)
+app.delete("/api/roles/delete/:id", auth, isSuperAdmin, deleteRole); //Eliminar rol

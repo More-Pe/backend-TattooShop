@@ -87,14 +87,14 @@ export const updateAppointment = async (req: Request, res: Response) => {
   }
 };
 
-//READ appointment by ID
+// READ appointment by ID
 export const getAppointmentById = async (req: Request, res: Response) => {
   try {
-    // 1. Obtener el ID de la cita
-    const appointmentId = req.body.id;
+    // 1. Obtener el ID de la cita desde los parámetros de la URL
+    const appointmentId = req.params.id;
     const userId = req.tokenData.id;
 
-    // 2. Validar info
+    // 2. Validar información
     if (!appointmentId) {
       return res.status(400).json({
         success: false,
@@ -120,6 +120,7 @@ export const getAppointmentById = async (req: Request, res: Response) => {
         id: parseInt(appointmentId, 10),
         user_id: userId,
       },
+      relations: { user: true, service: true },
     });
 
     if (!appointment) {
@@ -143,6 +144,7 @@ export const getAppointmentById = async (req: Request, res: Response) => {
     });
   }
 };
+
 
 //READ user appointments
 export const getAllAppointmentsForUser = async (
@@ -192,7 +194,7 @@ export const getAllAppointmentsForUser = async (
 export const deleteAppointment = async (req: Request, res: Response) => {
   try {
     // 1. Obtener el id a eliminar
-    const appointmentId = parseInt(req.params.id, 10);
+    const appointmentId = parseInt(req.body.id);
     const userId = req.tokenData.id;
 
     // 2. Validar que la cita existe y pertenece al usuario

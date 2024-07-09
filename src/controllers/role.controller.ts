@@ -60,7 +60,7 @@ export const getAllRoles = async (req: Request, res: Response) => {
 export const updateRole = async (req: Request, res: Response) => {
   try {
     // 1. Recuperar la info
-    const roleIdToUpdate = req.params.id;
+    const roleIdToUpdate = req.body.id;
     const body = req.body;
     // 2. Validar la info (no es necesario)
     // 3. Tratar la info si es necesario (no)

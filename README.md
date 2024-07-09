@@ -28,7 +28,12 @@ The studio offers the following services:
 4. `$ Execute the migrations`
 5. `$ Execute the seeders`
 6. `$ npm run dev` to elevate our server
-7. ...
+
+## Deploy 🚀
+
+<div align="center">
+    <a href="https://tattooshop.zeabur.app"><strong> Tattoo Studio Deploy </strong></a>
+</div>
 
 ## 🗄️ Database Schema
 

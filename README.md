@@ -12,40 +12,15 @@ The studio offers the following services:
 - **Piercing and Dilator Placement**: The studio offers professional piercing and dilator placement services, guaranteeing safe procedures and varied styles to satisfy individual client preferences.
 - **Piercing and Merchandise Sales**: In addition to its application services, the studio offers a selection of piercings and other body art-related products, allowing clients to purchase quality items to complement their unique style.
 
-## 📌 Endpoints
+## Local installation option
 
-### 🔑 Authentication
-| Method | URI               | Action         |
-|--------|-------------------|----------------|
-| POST   | /api/auth/register| Register user  |
-| POST   | /api/auth/login   | Login user     |
-
-### 👥 Users
-| Method | URI                                        | Action                |
-|--------|--------------------------------------------|-----------------------|
-| GET    | /api/users                                 | View all users        |
-| GET    | /api/users/profile                         | View user profile     |
-| PUT    | /api/users/profile                         | Update user profile   |
-| GET    | /api/users?email=example@example.com       | Filter user by email  |
-| DELETE | /api/users/{id}                            | Delete user           |
-| PUT    | /api/users/{id}/role                       | Change user role      |
-
-### 📅 Appointments
-| Method | URI                      | Action                  |
-|--------|--------------------------|-------------------------|
-| POST   | /api/appointments        | Create appointment      |
-| PUT    | /api/appointments        | Update my appointment   |
-| GET    | /api/appointments/{id}   | Retrieve appointment    |
-| GET    | /api/appointments        | View my appointments    |
-| DELETE | /api/appointments/{id}   | Delete appointment      |
-
-### 🛎️ Services
-| Method | URI                      | Action             |
-|--------|--------------------------|--------------------|
-| GET    | /api/services            | View all services  |
-| POST   | /api/services            | Create service     |
-| PUT    | /api/services/{id}       | Update service     |
-| DELETE | /api/services/{id}       | Delete service     |
+1. Clone the repository from the url
+2. `$ npm install`
+3. Connect the cloned repo with our Database
+4. `$ Execute the migrations`
+5. `$ Execute the seeders`
+6. `$ npm run dev` to elevate our server
+7. ...
 
 ## 🗄️ Database Schema
 
@@ -70,6 +45,51 @@ The studio offers the following services:
 
 **Other tools** <br><br>
 <img alt="npm" src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"> <img alt="docker" src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white">
+
+## 🌐 Endpoints
+
+### 🔑 Authentication
+| Method | URI               | Action         | Authentication | Permissions | Body                                  |
+|--------|-------------------|----------------|----------------|-------------|---------------------------------------|
+| POST   | /api/auth/register| Register user  | No             | Public      | `{ "user": "Name", "email": "yourmail@mail.com", "password": "123456789" }` |
+| POST   | /api/auth/login   | Login user     | No             | Public      | `{ "email": "yourmail@mail.com", "password": "123456789" }`                |
+
+### 👥 Users
+| Method | URI                                    | Action                  | Authentication | Permissions | Body                                  |
+|--------|----------------------------------------|-------------------------|----------------|-------------|---------------------------------------|
+| GET    | /api/users/all                         | View all users          | Yes            | Superadmin  | N/A                                   |
+| GET    | /api/users/profile                     | View user profile       | Yes            | User        | N/A                                   |
+| PUT    | /api/users/profile/update              | Update user profile     | Yes            | User        | `{ "field_to_update": "newValue" }`     |
+| GET    | /api/users?email=example@example.com   | Filter user by email    | Yes            | Superadmin  | N/A                                   |
+| DELETE | /api/users/:id                         | Delete user             | Yes            | Superadmin  | N/A                                   |
+| PUT    | /api/users/:id/role                    | Change user role        | Yes            | Superadmin  | `{ "role_id": newRoleId }`            |
+
+### 📅 Appointments
+| Method | URI                             | Action                | Authentication | Permissions | Body                                  |
+|--------|---------------------------------|-----------------------|----------------|-------------|---------------------------------------|
+| POST   | /api/appointments/create        | Create appointment    | Yes            | User        | `{ "appointment_date": "2024-07-10T15:30:00Z
+", "service_id": 2 }` |
+| PUT    | /api/appointments/update        | Update my appointment | Yes            | User        | `{ "id": appointmentId, "fieldToUpdate": "newValue" }`  |
+| GET    | /api/appointments/:id           | Retrieve appointment  | Yes            | User        | N/A                                   |
+| GET    | /api/appointments/scheduled     | View my appointments  | Yes            | User        | N/A                                   |
+| DELETE | /api/appointments/delete        | Delete appointment    | Yes            | User        | `{ "id": appointmentId }`             |
+
+### 🛎️ Services
+| Method | URI                         | Action                | Authentication | Permissions | Body                                  |
+|--------|-----------------------------|-----------------------|----------------|-------------|---------------------------------------|
+| GET    | /api/services/all           | View all services     | Yes            | User        | N/A                                   |
+| POST   | /api/services/create        | Create service        | Yes            | Superadmin  | `{ "service_name": "ServiceA", "description": "example" }` |
+| PUT    | /api/services/update/:id    | Update service        | Yes            | Superadmin  | `{ "service_name": "ServiceB", "description": "example" }` |
+| DELETE | /api/services/delete/:id    | Delete service        | Yes            | Superadmin  | N/A                                   |
+
+### 🛡️ Roles
+| Method | URI                          | Action                | Authentication | Permissions | Body                                  |
+|--------|------------------------------|-----------------------|----------------|-------------|---------------------------------------|
+| GET    | /api/roles/all               | View all roles        | Yes            | Superadmin  | N/A                                   |
+| POST   | /api/roles/create            | Create role           | Yes            | Superadmin  | `{ "id": number, "name": "roleName" }` |
+| PUT    | /api/roles/update/:id        | Update role           | Yes            | Superadmin  | `{ "field_to_update": "newValue" }`     |
+| DELETE | /api/roles/delete/:id        | Delete role           | Yes            | Superadmin  | N/A                                   |
+
 
 ## 📞 Contact
 

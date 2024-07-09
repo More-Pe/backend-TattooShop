@@ -57,13 +57,14 @@ app.post("/api/auth/login", login); //OBLIGATORIO (Funciona)
 app.get("/api/users/all", auth, isSuperAdmin, getAllUsers); //Ver todos los usuarios. A esto solo debe poder acceder el superadmin OBLIGATORIO (Funciona)
 app.get("/api/users/profile", auth, getUserProfile); //Ver perfil del usuario OBLIGATORIO (Funciona)
 app.put("/api/users/profile/update", auth, updateUserById); //Modificar los datos del perfil OBLIGATORIO (Funciona)
-app.delete("/api/users/:id", auth, isSuperAdmin, deleteUserById); //Eliminar el usuario. A esto solo debe poder acceder el superadmin EXTRA
+app.delete("/api/users/:id", auth, isSuperAdmin, deleteUserById); //Eliminar el usuario. A esto solo debe poder acceder el superadmin EXTRA (Funciona)
+
 //app.get("/users?email=ejemplo@ejemplo.com", filterUserById) TODO filtrar usuario por email (superadmin) EXTRA
 //app.put("/users/{id}/role", changeRoles) TODO cambiar de roles (superadmin) EXTRA
 
 // SERVICES CRUD
 app.post("/api/services/create", auth, isSuperAdmin, createService); //Crar servicio - A esto solo debe poder acceder el superadmin EXTRA
-app.get("/api/services/all", auth, getAllServices); //Ver todos los servicios OBLIGATORIO
+app.get("/api/services/all", auth, getAllServices); //Ver todos los servicios OBLIGATORIO (Funciona)
 app.put("/api/services/update/:id", auth, isSuperAdmin, updateService); //Modificar servicio - A esto solo debe poder acceder el superadmin EXTRA
 app.delete("/api/services/delete/:id", auth, isSuperAdmin, deleteService); //Eliminar servicio - A esto solo debe poder acceder el superadmin EXTRA
 

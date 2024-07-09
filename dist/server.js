@@ -12,7 +12,7 @@ const auth_controller_1 = require("./controllers/auth.controller");
 const users_controller_1 = require("./controllers/users.controller");
 const services_controller_1 = require("./controllers/services.controller");
 const appointments_controller_1 = require("./controllers/appointments.controller");
-const role_controller_1 = require("./controllers/role.controller");
+const role_controller_1 = require("./controllers/roles.controller");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 const PORT = process.env.port || 4000;

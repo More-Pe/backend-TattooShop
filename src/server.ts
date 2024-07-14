@@ -1,6 +1,6 @@
-import express from "express";
+import express from 'express';
 import dotenv from 'dotenv';
-import { AppDataSource } from "./database/db";
+import { AppDataSource } from './database/db';
 import authRouter from './routes/authRouter';
 import userRouter from './routes/userRouter';
 import servicesRouter from './routes/serviceRouter';
@@ -15,16 +15,15 @@ app.use(express.json());
 const PORT = process.env.PORT || 4000;
 
 AppDataSource.initialize()
-  .then(() => {
-    console.log("Database connected");
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  }
-);
+	.then(() => {
+		console.log('Database connected');
+		app.listen(PORT, () => {
+			console.log(`Server is running on port ${PORT}`);
+		});
+	})
+	.catch((error) => {
+		console.log(error);
+	});
 
 //Routes
 app.use('/api/auth', authRouter);

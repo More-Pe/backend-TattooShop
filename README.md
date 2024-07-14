@@ -24,10 +24,11 @@ The studio offers the following services:
 
 1. Clone the repository from the url
 2. `$ npm install`
-3. Connect the cloned repo with our Database
+3. Connect the cloned repo with our Database3. Connect the cloned repo with our Database3. Connect the cloned repo with our Database
 4. `$ Execute the migrations`
 5. `$ Execute the seeders`
 6. `$ npm run dev` to elevate our server
+
 
 ## Deploy 🚀
 
@@ -42,43 +43,43 @@ The studio offers the following services:
 ## 🌐 Endpoints
 
 ### 🔑 Authentication
-| Method | URI                    | Action           | Permissions | Body                                            |
+| Method | URI                    | Action           | Auth | Body                                            |
 |--------|------------------------|------------------|-------------|-------------------------------------------------|
-| POST   | /api/auth/register     | Register user    | Public      | `{ "user": "Name", "email": "yourmail@mail.com", "password": "123456789" }` |
-| POST   | /api/auth/login        | Login user       | Public      | `{ "email": "yourmail@mail.com", "password": "123456789" }`                |
+| POST   | /api/auth/register     | Register user    | N/A (Public)      | `{ "email": "yourmail@mail.com", "password": "123456789" }` |
+| POST   | /api/auth/login        | Login user       | N/A (Public)      | `{ "email": "yourmail@mail.com", "password": "123456789" }`                |
 
 ### 👥 Users
-| Method | URI                               | Action              | Permissions | Body                                            |
+| Method | URI                               | Action              | Auth | Body                                            |
 |--------|-----------------------------------|---------------------|-------------|-------------------------------------------------|
-| GET    | /api/users/all                    | View all users      | Superadmin  | N/A                                             |
-| GET    | /api/users/profile                | View user profile   | User        | N/A                                             |
-| PUT    | /api/users/profile/update         | Update user profile | User        | `{ "field_to_update": "newValue" }`             |
-| DELETE | /api/users/:id                    | Delete user         | Superadmin  | N/A                                             |
+| GET    | /api/users                    | View all users      | Token (Superadmin)  | N/A                                             |
+| GET    | /api/users/profile                | View user profile   | Token (User)        | N/A                                             |
+| PUT    | /api/users/profile         | Update user profile | Token (User)        | `{ "field_to_update": "newValue" }`             |
+| DELETE | /api/users/:id                    | Delete user         | Token (Superadmin)  | N/A                                             |
 
 ### 📅 Appointments
 | Method | URI                              | Action                | Permissions | Body                                            |
 |--------|----------------------------------|-----------------------|-------------|-------------------------------------------------|
-| POST   | /api/appointments/create         | Create appointment    | User        | `{ "appointment_date": "2024-07-10T15:30:00Z", "service_id": 2 }` |
-| PUT    | /api/appointments/update         | Update my appointment | User        | `{ "id": appointmentId, "fieldToUpdate": "newValue" }` |
-| GET    | /api/appointments/:id            | Retrieve appointment  | User        | N/A                                             |
-| GET    | /api/appointments/scheduled      | View my appointments  | User        | N/A                                             |
-| DELETE | /api/appointments/delete         | Delete appointment    | User        | `{ "id": appointmentId }`                       |
+| POST   | /api/appointments         | Create appointment    | Token (User)        | `{ "appointment_date": "2024-07-10T15:30:00Z", "service_id": 2 }` |
+| PUT    | /api/appointments         | Update my appointment | Token (User)        | `{ "id": appointmentId, "fieldToUpdate": "newValue" }` |
+| GET    | /api/appointments/:id            | Retrieve appointment  | Token (User)        | N/A                                             |
+| GET    | /api/appointments      | View my appointments  | Token (User)        | N/A                                             |
+| DELETE | /api/appointments         | Delete appointment    | Token (User)        | `{ "id": appointmentId }`                       |
 
 ### 🛎️ Services
 | Method | URI                        | Action            | Permissions | Body                                            |
 |--------|----------------------------|-------------------|-------------|-------------------------------------------------|
-| GET    | /api/services/all          | View all services | User        | N/A                                             |
-| POST   | /api/services/create       | Create service    | Superadmin  | `{ "service_name": "ServiceA", "description": "example" }` |
-| PUT    | /api/services/update/:id   | Update service    | Superadmin  | `{ "service_name": "ServiceB", "description": "example" }` |
-| DELETE | /api/services/delete/:id   | Delete service    | Superadmin  | N/A                                             |
+| GET    | /api/services          | View all services | User        | N/A                                             |
+| POST   | /api/services       | Create service    | Token (Superadmin)  | `{ "service_name": "ServiceA", "description": "example" }` |
+| PUT    | /api/services/:id   | Update service    | Token (Superadmin)  | `{ "service_name": "ServiceB", "description": "example" }` |
+| DELETE | /api/services/:id   | Delete service    | Token (Superadmin)  | N/A                                             |
 
 ### 🛡️ Roles
 | Method | URI                         | Action         | Permissions | Body                                            |
 |--------|-----------------------------|----------------|-------------|-------------------------------------------------|
-| GET    | /api/roles/all              | View all roles | Superadmin  | N/A                                             |
-| POST   | /api/roles/create           | Create role    | Superadmin  | `{ "id": number, "name": "roleName" }`          |
-| PUT    | /api/roles/update/:id       | Update role    | Superadmin  | `{ "field_to_update": "newValue" }`             |
-| DELETE | /api/roles/delete/:id       | Delete role    | Superadmin  | N/A                                             |
+| GET    | /api/roles              | View all roles | Superadmin  | N/A                                             |
+| POST   | /api/roles           | Create role    | Token (Superadmin)  | `{ "id": number, "name": "roleName" }`          |
+| PUT    | /api/roles/:id       | Update role    | Token (Superadmin)  | `{ "field_to_update": "newValue" }`             |
+| DELETE | /api/roles/:id       | Delete role    | Token (Superadmin)  | N/A                                             |
 
 ## 📞 Contact
 

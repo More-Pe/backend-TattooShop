@@ -1,23 +1,23 @@
 import {
-  BaseEntity,
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Appointment } from "./Appointment";
+	BaseEntity,
+	Column,
+	Entity,
+	OneToMany,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Appointment } from './Appointment';
 
-@Entity("services")
+@Entity('services')
 export class Service extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id!: number;
+	@PrimaryGeneratedColumn()
+	id!: number;
 
-  @Column({ name: "service_name" })
-  service_name!: string;
+	@Column({ name: 'service_name' })
+	service_name!: string;
 
-  @Column({ name: "description" })
-  description!: string;
+	@Column({ name: 'description' })
+	description!: string;
 
-  @OneToMany(() => Appointment, (appointments) => appointments.service)
-  appointments!: Appointment[];
+	@OneToMany(() => Appointment, (appointments) => appointments.service)
+	appointments!: Appointment[];
 }

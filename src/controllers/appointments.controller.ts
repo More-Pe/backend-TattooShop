@@ -42,12 +42,13 @@ export const createAppointment = async (req: Request, res: Response) => {
 export const updateAppointment = async (req: Request, res: Response) => {
 	try {
 		// 1. Obtener info
+		const appointmentId = req.body.id;
 		const appointmentDate = req.body.appointment_date;
 		const serviceId = req.body.service_id;
 		const userId = req.tokenData.id;
 
 		// 2. Validar info
-		if (!appointmentDate || !serviceId) {
+		if (!appointmentDate || !serviceId || !appointmentId) {
 			return res.status(400).json({
 				success: false,
 				message: 'Appointment ID, date, and service are required',
@@ -58,6 +59,7 @@ export const updateAppointment = async (req: Request, res: Response) => {
 		const appointment = await Appointment.findOne({
 			where: {
 				user_id: userId,
+				id: appointmentId
 			},
 		});
 

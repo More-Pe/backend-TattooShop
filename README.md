@@ -62,8 +62,7 @@ The studio offers the following services:
 
 | Method | URI                        | Action                | Permissions      | Body                                              |
 |--------|----------------------------|-----------------------|------------------|---------------------------------------------------|
-| POST   | /api/appointments          | Create appointment    | Token (User)     | `{ "appointment_date": year-month-dayThour:minute:secondZ
-,`<br>`"service_id": 2 }` |
+| POST   | /api/appointments          | Create appointment    | Token (User)     | `{ "appointment_date": year-month-dayThour:minute:secondZ,`<br>`"service_id": 2 }` |
 | PUT    | /api/appointments          | Update my appointment | Token (User)     | `{ "id": appointmentId,`<br>`"appointment_date": "newDate",`<br>`"service_id": "newService" }` |
 | GET    | /api/appointments/:id      | Retrieve appointment  | Token (User)     | N/A                                               |
 | GET    | /api/appointments          | View my appointments  | Token (User)     | N/A                                               |

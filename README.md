@@ -45,46 +45,47 @@ The studio offers the following services:
 <h3>🔑 Authentication</h3>
 
 | Method | URI                    | Action           | Auth           | Body                                              |
-|--------|------------------------|------------------|----------------|---------------------------------------------------|
-| POST   | /api/auth/register     | Register user    | N/A (Public)   | `{ "email": "youremail@email.com",`<br>`"password_hash": "yourPassword" }` |
-| POST   | /api/auth/login        | Login user       | N/A (Public)   | `{ "email": "youremail@email.com",`<br>`"password_hash": "yourPasswordHashed" }` |
+|:------:|:----------------------:|:----------------:|:--------------:|---------------------------------------------------|
+| POST   | /api/auth/register     | Register user    | N/A (public)   | `{ "email": "youremail@email.com", "password_hash": "yourPassword" }` |
+| POST   | /api/auth/login        | Login user       | N/A (public)   | `{ "email": "youremail@email.com", "password_hash": "yourPasswordHashed" }` |
 
 <h3>👥 Users</h3>
 
 | Method | URI                        | Action              | Auth               | Body                                              |
-|--------|----------------------------|---------------------|--------------------|---------------------------------------------------|
-| GET    | /api/users                 | View all users      | Token (Superadmin) | N/A                                               |
-| GET    | /api/users/profile         | View user profile   | Token (User)       | N/A                                               |
-| PUT    | /api/users/profile         | Update user profile | Token (User)       | `{ "first_name": "newFirstName",`<br>`"last_name": "newLastName",`<br>`"email": "newEmail",`<br>`"password_hash": "newPassword" }` |
-| DELETE | /api/users/:id             | Delete user         | Token (Superadmin) | N/A                                               |
+|:------:|:--------------------------:|:-------------------:|:------------------:|---------------------------------------------------|
+| GET    | /api/users                 | View all users      | Token (superadmin) | N/A                                               |
+| GET    | /api/users/profile         | View user profile   | Token (user)       | N/A                                               |
+| PUT    | /api/users/profile         | Update user profile | Token (user)       | `{ "first_name": "newFirstName", "last_name": "newLastName", "email": "newEmail", "password_hash": "newPassword" }` |
+| DELETE | /api/users/:id             | Delete user         | Token (superadmin) | N/A                                               |
 
 <h3>📅 Appointments</h3>
 
 | Method | URI                        | Action                | Permissions      | Body                                              |
-|--------|----------------------------|-----------------------|------------------|---------------------------------------------------|
-| POST   | /api/appointments          | Create appointment    | Token (User)     | `{ "appointment_date": year-month-dayThour:minute:secondZ,`<br>`"service_id": 2 }` |
-| PUT    | /api/appointments          | Update my appointment | Token (User)     | `{ "id": appointmentId,`<br>`"appointment_date": "newDate",`<br>`"service_id": "newService" }` |
-| GET    | /api/appointments/:id      | Retrieve appointment  | Token (User)     | N/A                                               |
-| GET    | /api/appointments          | View my appointments  | Token (User)     | N/A                                               |
-| DELETE | /api/appointments          | Delete appointment    | Token (User)     | `{ "id": appointmentId }`                         |
+|:------:|:--------------------------:|:---------------------:|:----------------:|---------------------------------------------------|
+| POST   | /api/appointments          | Create appointment    | Token (user)     | `{ "appointment_date": "year-month-dayThour:minute:secondZ", "service_id": 2 }` |
+| PUT    | /api/appointments          | Update my appointment | Token (user)     | `{ "id": appointmentId, "appointment_date": "newDate", "service_id": "newService" }` |
+| GET    | /api/appointments/:id      | Retrieve appointment  | Token (user)     | N/A                                               |
+| GET    | /api/appointments          | View my appointments  | Token (user)     | N/A                                               |
+| DELETE | /api/appointments          | Delete appointment    | Token (user)     | `{ "id": appointmentId }`                         |
 
 <h3>🛎️ Services</h3>
 
 | Method | URI                        | Action            | Permissions        | Body                                              |
-|--------|----------------------------|-------------------|--------------------|---------------------------------------------------|
-| GET    | /api/services              | View all services | User               | N/A                                               |
-| POST   | /api/services              | Create service    | Token (Superadmin) | `{ "service_name": "serviceName",`<br>`"description": "serviceDescription" }` |
-| PUT    | /api/services/:id          | Update service    | Token (Superadmin) | `{ "service_name": "newServiceName",`<br>`"description": "newDescription" }` |
-| DELETE | /api/services/:id          | Delete service    | Token (Superadmin) | N/A                                               |
+|:------:|:--------------------------:|:-----------------:|:------------------:|---------------------------------------------------|
+| GET    | /api/services              | View all services | Token (user)       | N/A                                               |
+| POST   | /api/services              | Create service    | Token (superadmin) | `{ "service_name": "serviceName", "description": "serviceDescription" }` |
+| PUT    | /api/services/:id          | Update service    | Token (superadmin) | `{ "service_name": "newServiceName", "description": "newDescription" }` |
+| DELETE | /api/services/:id          | Delete service    | Token (superadmin) | N/A                                               |
+
 
 <h3>🛡️ Roles</h3>
 
 | Method | URI                        | Action         | Permissions        | Body                                              |
-|--------|----------------------------|----------------|--------------------|---------------------------------------------------|
-| GET    | /api/roles                 | View all roles | Superadmin         | N/A                                               |
-| POST   | /api/roles                 | Create role    | Token (Superadmin) | `{ "id": roleId,`<br>`"name": "roleName" }`       |
-| PUT    | /api/roles/:id             | Update role    | Token (Superadmin) | `{ "id": newRoleId,`<br>`"name": "newRoleName" }`         |
-| DELETE | /api/roles/:id             | Delete role    | Token (Superadmin) | N/A                                               |
+|:------:|:--------------------------:|:--------------:|:------------------:|---------------------------------------------------|
+| GET    | /api/roles                 | View all roles | Token (superadmin) | N/A                                               |
+| POST   | /api/roles                 | Create role    | Token (superadmin) | `{ "id": roleId, "name": "roleName" }`            |
+| PUT    | /api/roles/:id             | Update role    | Token (superadmin) | `{ "id": newRoleId, "name": "newRoleName" }`      |
+| DELETE | /api/roles/:id             | Delete role    | Token (superadmin) | N/A                                               |
 
 
 ## 📞 Contact

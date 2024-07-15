@@ -22,13 +22,24 @@ The studio offers the following services:
 
 ## Local installation option
 
-1. Clone the repository from the url
-2. `$ npm install`
-3. Connect the cloned repo with our Database
-4. `$ Execute the migrations`
-5. `$ Execute the seeders`
-6. `$ npm run dev` to elevate our server
-
+1. Clone this repository:
+`$ git clone https://github.com/More-Pe/backend-TattooShop.git`
+2. Install node modules:
+`$ npm install -y`
+3. If you don't have one, create a MySQL container in Docker:
+`$ docker run -d --name mysqlc -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root  -v mysql_data:/var/lib/mysql mysql`
+4. Connect this repository with our database. Create an `.env` file in the root of the project with the following content, ensuring that these credentials match those set in the MySQL container:
+`DB_HOST=localhost`
+`DB_USER=root`
+`DB_PASSWORD=root`
+`DB_NAME=your_database_name`
+`DB_PORT=3306`
+5. Execute the migrations:
+`$ npm run migrations`
+6. If you want, execute the seeders:
+`$ npm run db:seed` or introduce the information manually.
+7. Elevate our server:
+`$ npm run dev`
 
 ## Deploy 🚀
 
@@ -45,14 +56,14 @@ The studio offers the following services:
 <h3>🔑 Authentication</h3>
 
 | Method | URI                    | Action           | Auth           | Body                                              |
-|:------:|:----------------------:|:----------------:|:--------------:|---------------------------------------------------|
+|:------:|:----------------------:|:----------------:|:--------------:|:---------------------------------------------------:|
 | POST   | /api/auth/register     | Register user    | <center>N/A (public)</center>   | `{ "email": "youremail@email.com",`<br>`"password_hash": "yourPassword" }` |
 | POST   | /api/auth/login        | Login user       | <center>N/A (public)</center>   | `{ "email": "youremail@email.com",`<br>`"password_hash": "yourPasswordHashed" }` |
 
 <h3>👥 Users</h3>
 
 | Method | URI                        | Action              | Auth               | Body                                              |
-|:------:|:--------------------------:|:-------------------:|:------------------:|---------------------------------------------------|
+|:------:|:--------------------------:|:-------------------:|:------------------:|:---------------------------------------------------:|
 | GET    | /api/users                 | View all users      | Token (superadmin) | <center>N/A</center>                                               |
 | GET    | /api/users/profile         | View user profile   | Token (user)       | <center>N/A</center>                                               |
 | PUT    | /api/users/profile         | Update user profile | Token (user)       | `{ "first_name": "newFirstName",`<br>`"last_name": "newLastName", "email": "newEmail",`<br>`"password_hash": "newPassword" }` |
@@ -61,31 +72,31 @@ The studio offers the following services:
 <h3>📅 Appointments</h3>
 
 | Method | URI                        | Action                | Permissions      | Body                                              |
-|:------:|:--------------------------:|:---------------------:|:----------------:|---------------------------------------------------|
+|:------:|:--------------------------:|:---------------------:|:----------------:|:---------------------------------------------------:|
 | POST   | /api/appointments          | Create appointment    | Token (user)     | `{ "appointment_date": "year-month-dayThour:minute:secondZ",`<br>`"service_id": 2 }` |
 | PUT    | /api/appointments          | Update my appointment | Token (user)     | `{ "id": appointmentId,`<br>`"appointment_date": "newDate",`<br>`"service_id": "newService" }` |
-| GET    | /api/appointments/:id      | Retrieve appointment  | Token (user)     | <center>N/A</center>                                               |
-| GET    | /api/appointments          | View my appointments  | Token (user)     | <center>N/A</center>                                               |
+| GET    | /api/appointments/:id      | Retrieve appointment  | Token (user)     | <center>N/A</center>                              |
+| GET    | /api/appointments          | View my appointments  | Token (user)     | <center>N/A</center>                              |
 | DELETE | /api/appointments          | Delete appointment    | Token (user)     | `{ "id": appointmentId }`                         |
 
 <h3>🛎️ Services</h3>
 
 | Method | URI                        | Action            | Permissions        | Body                                              |
-|:------:|:--------------------------:|:-----------------:|:------------------:|---------------------------------------------------|
+|:------:|:--------------------------:|:-----------------:|:------------------:|:-------------------------------------------------:|
 | GET    | /api/services              | View all services | <center>N/A (public)</center>       | <center>N/A</center>  |
 | POST   | /api/services              | Create service    | Token (superadmin) | `{ "service_name": "serviceName",`<br>`"description": "serviceDescription" }` |
 | PUT    | /api/services/:id          | Update service    | Token (superadmin) | `{ "service_name": "newServiceName",`<br>`"description": "newDescription" }` |
-| DELETE | /api/services/:id          | Delete service    | Token (superadmin) | <center>N/A</center>                                               |
+| DELETE | /api/services/:id          | Delete service    | Token (superadmin) | <center>N/A</center>                              |
 
 
 <h3>🛡️ Roles</h3>
 
 | Method | URI                        | Action         | Permissions        | Body                                              |
-|:------:|:--------------------------:|:--------------:|:------------------:|---------------------------------------------------|
-| GET    | /api/roles                 | View all roles | Token (superadmin) | <center>N/A</center>                                               |
-| POST   | /api/roles                 | Create role    | Token (superadmin) | `{ "id": roleId,`<br>`"name": "roleName" }`            |
-| PUT    | /api/roles/:id             | Update role    | Token (superadmin) | `{ "id": newRoleId,`<br>`"name": "newRoleName" }`      |
-| DELETE | /api/roles/:id             | Delete role    | Token (superadmin) | <center>N/A</center>                                               |
+|:------:|:--------------------------:|:--------------:|:------------------:|:-------------------------------------------------:|
+| GET    | /api/roles                 | View all roles | Token (superadmin) | <center>N/A</center>                              |
+| POST   | /api/roles                 | Create role    | Token (superadmin) | `{ "id": roleId,`<br>`"name": "roleName" }`       |
+| PUT    | /api/roles/:id             | Update role    | Token (superadmin) | `{ "id": newRoleId,`<br>`"name": "newRoleName" }` |
+| DELETE | /api/roles/:id             | Delete role    | Token (superadmin) | <center>N/A</center>                              |
 
 
 ## 📞 Contact

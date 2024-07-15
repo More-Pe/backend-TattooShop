@@ -10,10 +10,9 @@ import { auth } from '../middlewares/auth';
 
 const router = express.Router();
 
-router.post('/', auth, createAppointment); // Crear cita
-router.put('/', auth, updateAppointment); // Modificar cita
-router.get('/', auth, getAllAppointmentsForUser); // Ver citas del usuario
-router.delete('/', auth, deleteAppointment); // Eliminar cita
-router.get('/:id', auth, getAppointmentById); // Recuperar cita
-
+router.post('/', auth, createAppointment); 
+router.put('/', auth, updateAppointment);   
+router.get('/', auth, getAllAppointmentsForUser); 
+router.delete('/', auth, deleteAppointment); 
+router.get('/:id', auth, getAppointmentById); 
 export default router;

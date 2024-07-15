@@ -10,9 +10,9 @@ import { isSuperAdmin } from '../middlewares/isSuperAdmin';
 
 const router = express.Router();
 
-router.post('/', auth, isSuperAdmin, createRole); // Crear rol (solo para superadmin)
-router.get('/', auth, isSuperAdmin, getAllRoles); // Ver todos los roles (solo para superadmin)
-router.put('/:id', auth, isSuperAdmin, updateRole); // Modificar rol (solo para superadmin)
-router.delete('/:id', auth, isSuperAdmin, deleteRole); // Eliminar rol (solo para superadmin)
+router.post('/', auth, isSuperAdmin, createRole);
+router.get('/', auth, isSuperAdmin, getAllRoles);
+router.put('/:id', auth, isSuperAdmin, updateRole); 
+router.delete('/:id', auth, isSuperAdmin, deleteRole); 
 
 export default router;

@@ -4,11 +4,11 @@ import { Role } from '../database/models/Role';
 //CREATE
 export const createRole = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener info
+		//1. Get information
 		const roleId = req.body.id;
 		const roleName = req.body.name;
 
-		//2. Validar info
+		//2. Validate information
 		if (!roleId || !roleName) {
 			return res.status(400).json({
 				success: false,
@@ -16,13 +16,13 @@ export const createRole = async (req: Request, res: Response) => {
 			});
 		}
 
-		//3. Guardar en la DB
+		//3. Save in the database
 		const newRole = await Role.create({
 			id: roleId,
 			name: roleName,
 		}).save();
 
-		//4. Responder
+		//4. Response
 		res.status(201).json({
 			success: true,
 			message: 'Role have been created succesfully',
@@ -39,7 +39,7 @@ export const createRole = async (req: Request, res: Response) => {
 //READ
 export const getAllRoles = async (req: Request, res: Response) => {
 	try {
-		//1. Recupero info
+		//1. Get information
 		const role = await Role.find();
 
 		res.json({
@@ -59,19 +59,17 @@ export const getAllRoles = async (req: Request, res: Response) => {
 //UPDATE
 export const updateRole = async (req: Request, res: Response) => {
 	try {
-		// 1. Recuperar la info
+		// 1. Get information
 		const roleIdToUpdate = req.body.id;
 		const body = req.body;
-		// 2. Validar la info (no es necesario)
-		// 3. Tratar la info si es necesario (no)
-		// 4. Actualizar en DB
+		//2. Update in database
 		const roleUpdated = await Role.update(
 			{
 				id: parseInt(roleIdToUpdate),
 			},
 			body,
 		);
-		// 5. Responder
+		// 3. Response
 		res.status(200).json({
 			success: true,
 			message: 'Role updated succesfully',
@@ -89,11 +87,11 @@ export const updateRole = async (req: Request, res: Response) => {
 //DELETE
 export const deleteRole = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener el id a eliminar
+		//1. Get information
 		const roleToDelete = Number(req.params.id);
 		const body = req.body;
 
-		//2. Eliminar de la DB
+		//2. Remove from the database
 		const roleDeleted = await Role.delete(roleToDelete);
 
 		if (!roleDeleted.affected) {
@@ -103,7 +101,7 @@ export const deleteRole = async (req: Request, res: Response) => {
 			});
 		}
 
-		//3. Responder
+		//3. Response
 		res.status(200).json({
 			succes: true,
 			message: 'Role was deleted succesfully',

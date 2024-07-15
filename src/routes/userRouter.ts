@@ -10,9 +10,9 @@ import { isSuperAdmin } from '../middlewares/isSuperAdmin';
 
 const router = express.Router();
 
-router.get('/', auth, isSuperAdmin, getAllUsers); // Ver todos los usuarios (solo para superadmin)
-router.get('/profile', auth, getUserProfile); // Ver perfil del usuario
-router.put('/profile', auth, updateUserById); // Modificar perfil del usuario
-router.delete('/:id', auth, isSuperAdmin, deleteUserById); // Eliminar usuario (solo para superadmin)
+router.get('/', auth, isSuperAdmin, getAllUsers); 
+router.get('/profile', auth, getUserProfile); 
+router.put('/profile', auth, updateUserById); 
+router.delete('/:id', auth, isSuperAdmin, deleteUserById);
 
 export default router;

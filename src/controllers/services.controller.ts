@@ -4,11 +4,11 @@ import { Service } from '../database/models/Service';
 //CREATE
 export const createService = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener info
+		//1. Get information
 		const serviceName = req.body.service_name;
 		const description = req.body.description;
 
-		//2. Validar info
+		//2. Validate information
 		if (!serviceName || !description) {
 			return res.status(400).json({
 				success: false,
@@ -16,13 +16,13 @@ export const createService = async (req: Request, res: Response) => {
 			});
 		}
 
-		//3. Guardar en la DB
+		//3. Save in the database
 		const newService = await Service.create({
 			service_name: serviceName,
 			description: description,
 		}).save();
 
-		//4. Responder
+		//4. Response
 		res.status(201).json({
 			success: true,
 			message: 'Service have been created succesfully',
@@ -59,19 +59,17 @@ export const getAllServices = async (req: Request, res: Response) => {
 //UPDATE
 export const updateService = async (req: Request, res: Response) => {
 	try {
-		// 1. Recuperar la info
+		// 1. Get information
 		const serviceIdToUpdate = req.params.id;
 		const body = req.body;
-		// 2. Validar la info (no es necesario)
-		// 3. Tratar la info si es necesario (no)
-		// 4. Actualizar en DB
+		// 2. Update in database
 		const serviceUpdated = await Service.update(
 			{
 				id: parseInt(serviceIdToUpdate),
 			},
 			body,
 		);
-		// 5. Responder
+		// 3. Response
 		res.status(200).json({
 			success: true,
 			message: 'Service updated succesfully',
@@ -89,10 +87,10 @@ export const updateService = async (req: Request, res: Response) => {
 //DELETE
 export const deleteService = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener el id a eliminar
+		//1. Get information
 		const serviceToDelete = Number(req.params.id);
 
-		//2. Eliminar de la DB
+		//2. Remove from the database
 		const serviceDeleted = await Service.delete(serviceToDelete);
 
 		if (!serviceDeleted.affected) {
@@ -102,7 +100,7 @@ export const deleteService = async (req: Request, res: Response) => {
 			});
 		}
 
-		//3. Responder
+		//3. Response
 		res.status(200).json({
 			succes: true,
 			message: 'Service was deleted succesfully',

@@ -4,12 +4,12 @@ import { Appointment } from '../database/models/Appointment';
 //CREATE
 export const createAppointment = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener info
+		//1. Get information
 		const appointmentDate = req.body.appointment_date;
 		const userId = req.tokenData.id;
 		const serviceId = req.body.service_id;
 
-		//2. Validar info
+		//2. Validate information
 		if (!appointmentDate || !serviceId) {
 			return res.status(400).json({
 				success: false,
@@ -17,14 +17,14 @@ export const createAppointment = async (req: Request, res: Response) => {
 			});
 		}
 
-		//3. Guardar en la DB
+		//3. Save in the database
 		const newAppointment = await Appointment.create({
 			appointment_date: appointmentDate,
 			user_id: userId,
 			service_id: serviceId,
 		}).save();
 
-		//4. Responder
+		//4. Response
 		res.status(201).json({
 			success: true,
 			message: 'Appointment have been created succesfully',
@@ -41,13 +41,13 @@ export const createAppointment = async (req: Request, res: Response) => {
 //UPDATE
 export const updateAppointment = async (req: Request, res: Response) => {
 	try {
-		// 1. Obtener info
+		// 1. Get information
 		const appointmentId = req.body.id;
 		const appointmentDate = req.body.appointment_date;
 		const serviceId = req.body.service_id;
 		const userId = req.tokenData.id;
 
-		// 2. Validar info
+		// 2. Validate information
 		if (!appointmentDate || !serviceId || !appointmentId) {
 			return res.status(400).json({
 				success: false,
@@ -55,7 +55,7 @@ export const updateAppointment = async (req: Request, res: Response) => {
 			});
 		}
 
-		// 3. Buscar la cita en la DB
+		// 3. Find appoinment in database
 		const appointment = await Appointment.findOne({
 			where: {
 				user_id: userId,
@@ -70,12 +70,12 @@ export const updateAppointment = async (req: Request, res: Response) => {
 			});
 		}
 
-		// 4. Actualizar la cita en la DB
+		// 4. Update in database
 		appointment.appointment_date = appointmentDate;
 		appointment.service_id = serviceId;
 		await appointment.save();
 
-		// 5. Responder
+		// 5. Response
 		res.status(200).json({
 			success: true,
 			message: 'Appointment has been updated successfully',
@@ -92,11 +92,11 @@ export const updateAppointment = async (req: Request, res: Response) => {
 // READ appointment by ID
 export const getAppointmentById = async (req: Request, res: Response) => {
 	try {
-		// 1. Obtener el ID de la cita desde los parámetros de la URL
+		// 1. Get information
 		const appointmentId = req.params.id;
 		const userId = req.tokenData.id;
 
-		// 2. Validar información
+		// 2. Validate information
 		if (!appointmentId) {
 			return res.status(400).json({
 				success: false,
@@ -104,7 +104,7 @@ export const getAppointmentById = async (req: Request, res: Response) => {
 			});
 		}
 
-		// 3. Buscar la cita en la DB
+		// 3. Find appoinment in database
 		const appointment = await Appointment.findOne({
 			select: {
 				id: true,
@@ -132,7 +132,7 @@ export const getAppointmentById = async (req: Request, res: Response) => {
 			});
 		}
 
-		// 4. Responder
+		// 4. Response
 		res.status(200).json({
 			success: true,
 			message: 'The appointment was found: ',
@@ -153,10 +153,10 @@ export const getAllAppointmentsForUser = async (
 	res: Response,
 ) => {
 	try {
-		// 1. Obtener el ID del usuario
+		// 1. Get information
 		const userId = req.tokenData.id;
 
-		// 2. Buscar todas las citas del usuario en la DB
+		// 2. Find all user appointments in the database
 		const appointments = await Appointment.find({
 			select: {
 				id: true,
@@ -174,9 +174,9 @@ export const getAllAppointmentsForUser = async (
 				user_id: userId,
 			},
 
-			relations: { user: true, service: true }, //Dice con qué tablas relaciono para selccionar (select) la info que que quiero ver
+			relations: { user: true, service: true },
 		});
-		// 3. Responder
+		// 3. Response
 		res.status(200).json({
 			success: true,
 			message: 'You have reserved the following appointments: ',
@@ -194,11 +194,11 @@ export const getAllAppointmentsForUser = async (
 // DELETE
 export const deleteAppointment = async (req: Request, res: Response) => {
 	try {
-		// 1. Obtener el id a eliminar
+		// 1. Get information
 		const appointmentId = parseInt(req.body.id);
 		const userId = req.tokenData.id;
 
-		// 2. Validar que la cita existe y pertenece al usuario
+		// 2. Validte information
 		const appointmentToDelete = await Appointment.findOne({
 			where: {
 				id: appointmentId,
@@ -213,10 +213,10 @@ export const deleteAppointment = async (req: Request, res: Response) => {
 			});
 		}
 
-		// 3. Eliminar la cita de la DB
+		// 3. Remove from the database
 		await Appointment.delete(appointmentId);
 
-		// 4. Responder
+		// 4. Response
 		res.status(200).json({
 			success: true,
 			message: 'Appointment was deleted successfully',

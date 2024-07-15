@@ -13,12 +13,12 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
 			});
 		}
 
-		const token = req.headers.authorization.split(' ')[1]; //Recupera el token y con split lo tranforma en array, utiliza el elemento en posición 1
+		const token = req.headers.authorization.split(' ')[1]; //Retrieves the token and with 'split' transforms it into an array, uses the element in position 1
 
 		const decoded = jwt.verify(
 			token,
 			process.env.JWT_SECRET as string,
-		) as TokenDecoded; // El verify comprueba que el token se ha firmado con la palabra correcta y extrae los datos solicitados (id, email y error). El as TokenDecoded le dice que se comporte como la interface TokenDecoded (ver index.d.ts)
+		) as TokenDecoded; // The 'verify' checks that the token has been signed with the correct word and extracts the requested data (id, email and error). The 'as TokenDecoded' makes it behave like the TokenDecoded interface (see index.d.ts).
 
 		req.tokenData = {
 			id: decoded.id,

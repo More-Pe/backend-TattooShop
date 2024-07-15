@@ -6,11 +6,11 @@ import jwt from 'jsonwebtoken';
 //CREATE
 export const register = async (req: Request, res: Response) => {
 	try {
-		// 1. Recuperar la info
+		// 1. Get information
 		const email = req.body.email;
 		const passwordHash = req.body.password_hash;
 
-		// 2. Validar la info
+		// 2. Validate information
 		if (!email || !passwordHash) {
 			return res.json(400).json({
 				success: false,
@@ -18,7 +18,7 @@ export const register = async (req: Request, res: Response) => {
 			});
 		}
 
-		// TODO validar formato email
+		// TODO valite email format
 
 		if (passwordHash.length < 8 || passwordHash.length > 12) {
 			return res.status(400).json({
@@ -27,17 +27,17 @@ export const register = async (req: Request, res: Response) => {
 			});
 		}
 
-		// 3. Tratar la info si hace falta
+		// 3. Process information
 
 		const hashedPassword = bcrypt.hashSync(passwordHash, 10);
 
-		// 4. Guardar en DB
+		// 4. Save in database
 		const newUser = await User.create({
 			email: email,
 			password_hash: hashedPassword,
 		}).save();
 
-		// 5. Responder
+		// 5. Response
 		res.status(201).json({
 			success: true,
 			message: 'User registered succesfully',
@@ -56,10 +56,10 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener info
+		//1. Get information
 		const { email, password_hash } = req.body;
 
-		//2. Validar info
+		//2. Validate information
 		if (!email || !password_hash) {
 			return res.status(400).json({
 				succes: false,
@@ -67,7 +67,7 @@ export const login = async (req: Request, res: Response) => {
 			});
 		}
 
-		//3. Comprobar si el usuario existe
+		//3. Check if user exists
 
 		const user = await User.findOne({
 			where: { email: email },
@@ -79,8 +79,7 @@ export const login = async (req: Request, res: Response) => {
 				message: 'Email or password not valid',
 			});
 		}
-
-		//4. Comprobar la contraseña
+		//4. Chek password
 		const isPasswordValid = bcrypt.compareSync(
 			password_hash,
 			user.password_hash,
@@ -93,14 +92,14 @@ export const login = async (req: Request, res: Response) => {
 			});
 		}
 
-		//5. Creación del token
+		//5. Create token
 		const token = jwt.sign(
 			{
 				id: user.id,
 				role_id: user.role_id,
 				email: user.email,
 			},
-			process.env.JWT_SECRET as string, //IMPORTANTE
+			process.env.JWT_SECRET as string, //Important!
 			{
 				expiresIn: '2h',
 			},

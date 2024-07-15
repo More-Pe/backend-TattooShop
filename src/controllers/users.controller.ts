@@ -4,14 +4,14 @@ import { User } from '../database/models/User';
 //READ all users
 export const getAllUsers = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener información
+		//1. Get information
 		const users = await User.find({
 			select: {
 				email: true,
 			},
 		});
 
-		//2. Responder
+		//2. Response
 		res.status(200).json({
 			success: true,
 			message: 'Users retrived successfully',
@@ -29,15 +29,14 @@ export const getAllUsers = async (req: Request, res: Response) => {
 //READ profile
 export const getUserProfile = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener información
+		//1. Get information
 		const userId = req.tokenData.id;
 
-		//2. Bucarlo en DB
-
+		//2. Find in database
 		const user = await User.findOne({
 			where: { id: userId },
 		});
-		//2. Responder
+		//2. Response
 		res.status(200).json({
 			success: true,
 			message: 'Profile retrived successfully',
@@ -55,14 +54,14 @@ export const getUserProfile = async (req: Request, res: Response) => {
 //UPDATE
 export const updateUserById = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener el id del usuario desde el token decodificado
+		//1. Get info
 		const userIdToUpdate = req.tokenData.id;
 		const body = req.body;
 
-		//4. Guardar la información en la DB
+		//2. Save in database
 		const userUpdated = await User.update({ id: userIdToUpdate }, body);
 
-		//5. Responder
+		//3. Response
 		res.status(200).json({
 			success: true,
 			message: 'User updated successfully',
@@ -80,11 +79,10 @@ export const updateUserById = async (req: Request, res: Response) => {
 //DELETE
 export const deleteUserById = async (req: Request, res: Response) => {
 	try {
-		//1. Obtener el id a eliminar
-
+		//1. Get info
 		const userIdToDelete = Number(req.params.id);
 
-		//2. Eliminar de la DB
+		//2. Remove from the database
 		const userDeleted = await User.delete(userIdToDelete);
 
 		if (!userDeleted.affected) {
@@ -94,7 +92,7 @@ export const deleteUserById = async (req: Request, res: Response) => {
 			});
 		}
 
-		//3. Responder
+		//3. Response
 		res.status(200).json({
 			success: true,
 			message: 'User was deleted succesfully',

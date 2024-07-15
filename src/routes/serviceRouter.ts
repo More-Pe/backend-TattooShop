@@ -10,9 +10,9 @@ import { isSuperAdmin } from '../middlewares/isSuperAdmin';
 
 const router = express.Router();
 
-router.post('/', auth, isSuperAdmin, createService); // Crear servicio (solo para superadmin)
-router.get('/', getAllServices); // Ver todos los servicios
-router.put('/:id', auth, isSuperAdmin, updateService); // Modificar servicio (solo para superadmin)
-router.delete('/:id', auth, isSuperAdmin, deleteService); // Eliminar servicio (solo para superadmin)
+router.post('/', auth, isSuperAdmin, createService);
+router.get('/', getAllServices);
+router.put('/:id', auth, isSuperAdmin, updateService); 
+router.delete('/:id', auth, isSuperAdmin, deleteService);
 
 export default router;

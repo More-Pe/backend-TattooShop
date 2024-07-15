@@ -29,11 +29,11 @@ The studio offers the following services:
 3. If you don't have one, create a MySQL container in Docker:
 `$ docker run -d --name mysqlc -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root  -v mysql_data:/var/lib/mysql mysql`
 4. Connect this repository with our database. Create an `.env` file in the root of the project with the following content, ensuring that these credentials match those set in the MySQL container:
-`DB_HOST=localhost`
-`DB_USER=root`
-`DB_PASSWORD=root`
-`DB_NAME=your_database_name`
-`DB_PORT=3306`
+- `DB_HOST=localhost`
+- `DB_USER=root`
+- `DB_PASSWORD=root`
+- `DB_NAME=your_database_name`
+- `DB_PORT=3306`
 5. Execute the migrations:
 `$ npm run migrations`
 6. If you want, execute the seeders:

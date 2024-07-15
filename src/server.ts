@@ -12,6 +12,13 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+//Routes
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
+app.use('/api/services', servicesRouter);
+app.use('/api/appointments', appointmentsRouter);
+app.use('/api/roles', rolesRouter);
+
 const PORT = process.env.PORT || 4000;
 
 AppDataSource.initialize()
@@ -25,9 +32,3 @@ AppDataSource.initialize()
 		console.log(error);
 	});
 
-//Routes
-app.use('/api/auth', authRouter);
-app.use('/api/users', userRouter);
-app.use('/api/services', servicesRouter);
-app.use('/api/appointments', appointmentsRouter);
-app.use('/api/roles', rolesRouter);

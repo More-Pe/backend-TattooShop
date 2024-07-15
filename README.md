@@ -24,7 +24,7 @@ The studio offers the following services:
 
 1. Clone the repository from the url
 2. `$ npm install`
-3. Connect the cloned repo with our Database3. Connect the cloned repo with our Database3. Connect the cloned repo with our Database
+3. Connect the cloned repo with our Database
 4. `$ Execute the migrations`
 5. `$ Execute the seeders`
 6. `$ npm run dev` to elevate our server
@@ -72,7 +72,7 @@ The studio offers the following services:
 
 | Method | URI                        | Action            | Permissions        | Body                                              |
 |:------:|:--------------------------:|:-----------------:|:------------------:|---------------------------------------------------|
-| GET    | /api/services              | View all services | Token (user)       | <center>N/A</center>                                               |
+| GET    | /api/services              | View all services | <center>N/A (public)</center>       | <center>N/A</center>  |
 | POST   | /api/services              | Create service    | Token (superadmin) | `{ "service_name": "serviceName",`<br>`"description": "serviceDescription" }` |
 | PUT    | /api/services/:id          | Update service    | Token (superadmin) | `{ "service_name": "newServiceName",`<br>`"description": "newDescription" }` |
 | DELETE | /api/services/:id          | Delete service    | Token (superadmin) | <center>N/A</center>                                               |

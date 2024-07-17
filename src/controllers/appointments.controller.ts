@@ -59,7 +59,7 @@ export const updateAppointment = async (req: Request, res: Response) => {
 		const appointment = await Appointment.findOne({
 			where: {
 				user_id: userId,
-				id: appointmentId
+				id: appointmentId,
 			},
 		});
 

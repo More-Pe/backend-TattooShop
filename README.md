@@ -23,7 +23,9 @@ The studio offers the following services:
 ## Local installation option
 
 1. Clone this repository:
+
 `$ git clone https://github.com/More-Pe/backend-TattooShop.git`
+
 2. Install node modules:
 `$ npm install -y`
 3. If you don't have one, create a MySQL container in Docker:

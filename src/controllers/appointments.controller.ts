@@ -16,6 +16,14 @@ export const createAppointment = async (req: Request, res: Response) => {
 				message: 'Date and service are required',
 			});
 		}
+		const currentDate = new Date();
+		const appointmentDateObject = new Date(appointmentDate);
+		if (appointmentDateObject < currentDate) {
+		  return res.status(400).json({
+			success: false,
+			message: 'Appointment date cannot be in the past',
+		  });
+		}
 
 		//3. Save in the database
 		const newAppointment = await Appointment.create({
@@ -28,6 +36,7 @@ export const createAppointment = async (req: Request, res: Response) => {
 		res.status(201).json({
 			success: true,
 			message: 'Appointment have been created succesfully',
+			data: newAppointment
 		});
 	} catch (error) {
 		res.status(500).json({
@@ -54,7 +63,14 @@ export const updateAppointment = async (req: Request, res: Response) => {
 				message: 'Appointment ID, date, and service are required',
 			});
 		}
-
+		const currentDate = new Date();
+		const appointmentDateObject = new Date(appointmentDate);
+		if (appointmentDateObject < currentDate) {
+		  return res.status(400).json({
+			success: false,
+			message: 'Appointment date cannot be in the past',
+		  });
+		}
 		// 3. Find appoinment in database
 		const appointment = await Appointment.findOne({
 			where: {

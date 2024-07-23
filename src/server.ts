@@ -6,11 +6,15 @@ import userRouter from './routes/userRouter';
 import servicesRouter from './routes/serviceRouter';
 import appointmentsRouter from './routes/appointmentRouter';
 import rolesRouter from './routes/roleRouter';
+import cors from 'cors';
+
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+
 
 //Routes
 app.use('/api/auth', authRouter);

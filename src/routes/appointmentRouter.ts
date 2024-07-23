@@ -8,6 +8,7 @@ import {
 } from '../controllers/appointments.controller';
 import { auth } from '../middlewares/auth';
 
+
 const router = express.Router();
 
 router.post('/', auth, createAppointment); 

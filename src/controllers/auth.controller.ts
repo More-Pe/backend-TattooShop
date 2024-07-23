@@ -85,7 +85,7 @@ export const login = async (req: Request, res: Response) => {
 			user.password_hash,
 		);
 
-		if (isPasswordValid) {
+		if (!isPasswordValid) {
 			return res.status(400).json({
 				success: false,
 				message: 'Email or password not valid',

@@ -12,23 +12,22 @@ export const register = async (req: Request, res: Response) => {
 
 		// 2. Validate information
 		if (!email || !passwordHash) {
-			return res.json(400).json({
+			return res.status(400).json({
 				success: false,
 				message: 'Email and password are required',
 			});
 		}
 
-		// TODO valite email format
+		// TODO: Validate email format
 
 		if (passwordHash.length < 8 || passwordHash.length > 12) {
 			return res.status(400).json({
 				success: false,
-				message: 'Password is not valid, 8 to 12 charachters must be needed',
+				message: 'Password is not valid, 8 to 12 characters are required',
 			});
 		}
 
 		// 3. Process information
-
 		const hashedPassword = bcrypt.hashSync(passwordHash, 10);
 
 		// 4. Save in database
@@ -38,16 +37,16 @@ export const register = async (req: Request, res: Response) => {
 		}).save();
 
 		// 5. Response
-		res.status(201).json({
+		return res.status(201).json({
 			success: true,
-			message: 'User registered succesfully',
+			message: 'User registered successfully',
 			data: newUser,
 		});
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			success: false,
 			message: 'User cannot be registered',
-			error: error,
+			error: error
 		});
 	}
 };

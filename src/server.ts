@@ -6,7 +6,7 @@ import userRouter from './routes/userRouter';
 import servicesRouter from './routes/serviceRouter';
 import appointmentsRouter from './routes/appointmentRouter';
 import rolesRouter from './routes/roleRouter';
-import cors from 'cors';
+import cors from 'cors'
 
 
 dotenv.config();
@@ -14,9 +14,11 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({origin: 'http://localhost:5173', // request origin URL
-	methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // allowed methods in the request
-	credentials: true, // allows session cookies from browser to pass through
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 

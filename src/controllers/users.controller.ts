@@ -8,7 +8,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
 		//1. Get information
 		const users = await User.find({
 			select: {
-				email: true,
+				id: true,
+				email: true
 			},
 		});
 

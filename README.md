@@ -79,7 +79,7 @@ The studio offers the following services:
 | PUT    | /api/appointments          | Update my appointment | Token (user)     | `{ "id": appointmentId,`<br>`"appointment_date": "newDate",`<br>`"service_id": "newService" }` |
 | GET    | /api/appointments/:id      | Retrieve appointment  | Token (user)     | <center>N/A</center>                              |
 | GET    | /api/appointments          | View my appointments  | Token (user)     | <center>N/A</center>                              |
-| DELETE | /api/appointments          | Delete appointment    | Token (user)     | `{ "id": appointmentId }`                         |
+| DELETE | /api/appointments/:id      | Delete appointment    | Token (user)     |   <center>N/A</center>                      |
 
 <h3>🛎️ Services</h3>
 

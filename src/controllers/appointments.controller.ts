@@ -209,39 +209,39 @@ export const getAllAppointmentsForUser = async (
 
 // DELETE
 export const deleteAppointment = async (req: Request, res: Response) => {
-	try {
-		// 1. Get information
-		const appointmentId = parseInt(req.body.id);
-		const userId = req.tokenData.id;
+    try {
+        // 1. Get information
+        const appointmentId = parseInt(req.params.id);
+        const userId = req.tokenData.id;
 
-		// 2. Validte information
-		const appointmentToDelete = await Appointment.findOne({
-			where: {
-				id: appointmentId,
-				user_id: userId,
-			},
-		});
+        // 2. Validate information
+        const appointmentToDelete = await Appointment.findOne({
+            where: {
+                id: appointmentId,
+                user_id: userId,
+            },
+        });
 
-		if (!appointmentToDelete) {
-			return res.status(404).json({
-				success: false,
-				message: "Appointment doesn't exist or doesn't belong to the user",
-			});
-		}
+        if (!appointmentToDelete) {
+            return res.status(404).json({
+                success: false,
+                message: "Appointment doesn't exist or doesn't belong to the user",
+            });
+        }
 
-		// 3. Remove from the database
-		await Appointment.delete(appointmentId);
+        // 3. Remove from the database
+        await Appointment.delete(appointmentId);
 
-		// 4. Response
-		res.status(200).json({
-			success: true,
-			message: 'Appointment was deleted successfully',
-		});
-	} catch (error) {
-		res.status(500).json({
-			success: false,
-			message: 'Error deleting appointment',
-			error: error,
-		});
-	}
+        // 4. Response
+        res.status(200).json({
+            success: true,
+            message: 'Appointment was deleted successfully',
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error deleting appointment',
+            error: error,
+        });
+    }
 };

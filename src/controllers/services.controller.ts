@@ -5,9 +5,8 @@ import { Service } from '../database/models/Service';
 export const createService = async (req: Request, res: Response) => {
 	try {
 		//1. Get information
-		const serviceName = req.body.service_name;
-		const description = req.body.description;
-
+		const {serviceName, description, image} = req.body;
+	
 		//2. Validate information
 		if (!serviceName || !description) {
 			return res.status(400).json({
@@ -20,6 +19,7 @@ export const createService = async (req: Request, res: Response) => {
 		const newService = await Service.create({
 			service_name: serviceName,
 			description: description,
+			image_url: image
 		}).save();
 
 		//4. Response

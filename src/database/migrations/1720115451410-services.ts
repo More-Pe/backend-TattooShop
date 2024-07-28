@@ -24,6 +24,11 @@ export class Services1720115451410 implements MigrationInterface {
             name: "description",
             type: "text",
           },
+          {
+						name: 'image_url',
+						type: 'text',
+						isNullable: true,
+					},
         ],
       }),
       true

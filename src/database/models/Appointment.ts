@@ -23,6 +23,7 @@ export class Appointment extends BaseEntity {
 	@Column({ name: 'service_id' })
 	service_id!: number;
 
+
 	@ManyToOne(() => Service, (service) => service.appointments)
 	@JoinColumn({ name: 'service_id' })
 	service!: Service;
